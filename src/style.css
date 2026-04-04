@@ -1,0 +1,201 @@
+/* ============================================
+   1. IMPORTS EXTERNOS (ANTES DO TAILWIND!)
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ============================================
+   2. TAILWIND DIRECTIVES - SEMPRE NO TOPO!
+   Para Tailwind v4+, use @import ao invés de @tailwind
+   ============================================ */
+@import "tailwindcss";
+
+/* ============================================
+   3. ESTILOS BASE (@layer base)
+   Sobrescreve estilos padrão do navegador/Tailwind
+   ============================================ */
+@layer base {
+
+  /* Scrollbar escondida global */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Suaviza scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================================
+   4. COMPONENTES REUTILIZÁVEIS (@layer components)
+   Classes que você usa várias vezes no HTML
+   ============================================ */
+@layer components {
+
+  /* Gradiente dourado para texto */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #F0DEAA 0%, #D4A532 50%, #B8860B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gradiente dourado para fundo */
+  .bg-gradient-gold {
+    background: linear-gradient(135deg, #D4A532 0%, #B8860B 50%, #8B6914 100%);
+  }
+
+  /* Borda com gradiente dourado */
+  .border-gradient-gold {
+    border-image: linear-gradient(135deg, #D4A532, #B8860B) 1;
+  }
+
+  /* Efeito vidro (glassmorphism) */
+  .glass-effect {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Overlay do hero */
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.8) 100%);
+  }
+
+  /* Animação de revelação no scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Efeito hover em cards */
+  .card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(212, 165, 50, 0.2);
+  }
+
+  /* Animação de entrada do modal */
+  .modal-enter {
+    animation: modalEnter 0.3s ease-out forwards;
+  }
+
+  /* Efeito shimmer para loading/destaque */
+  .shimmer-bg {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+  }
+
+  /* Gradient text fix para Safari */
+  .gradient-text-fix {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+
+
+/* ============================================
+   5. UTILITIES CUSTOMIZADAS (@layer utilities)
+   Classes pequenas e específicas
+   ============================================ */
+@layer utilities {
+
+  /* Esconder scrollbar em elemento específico */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Text shadow para legibilidade */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ============================================
+   6. KEYFRAMES (ANIMAÇÕES)
+   Fora dos @layer porque são referenciadas
+   ============================================ */
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes floatSlow {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* ============================================
+   7. MEDIA QUERIES E AJUSTES RESPONSIVOS
+   ============================================ */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+}
