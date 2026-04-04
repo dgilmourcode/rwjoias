@@ -1124,11 +1124,11 @@ O GitHub Pages é uma ótima opção para hospedar sites estáticos diretamente 
     Adicione a propriedade `homepage` e os scripts `predeploy` e `deploy` ao seu `package.json`:
     ```json
     {
-      "name": "rw-joias",
-      "version": "0.0.0",
+      "name": "rwjoias",
+      "version": "1.0.0",
       "private": true,
       "type": "module",
-      "homepage": "https://SEU-USUARIO.github.io/SEU-REPOSITORIO/", // Substitua pelos seus dados
+      "homepage": "https://SEU-USUARIO.github.io/SEU-REPOSITORIO-GITHUB/", // Substitua pelos seus dados
       "scripts": {
         "dev": "vite",
         "build": "vite build",
