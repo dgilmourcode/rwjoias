@@ -594,7 +594,7 @@ A escolha das fontes é fundamental para a identidade visual. Combinamos uma fon
   Texto descritivo aqui...
 </p>
 
-<!-- TRACKING (ESPAÇAMENTO ENTRE LETRAS) -->
+<!-- TRACKING (ESPAÇAMENTO ENTRE LETRAS) E CAIXA ALTA (UPPERCASE) -->
 <span class="tracking-[0.3em] uppercase">Joalheria</span>
 ```
 

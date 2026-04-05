@@ -10,14 +10,14 @@ const collections = [
     {
         id: 'pulseira',
         name: 'Pulseiras',
-        image: 'https://images.unsplash.com/photo-1725368844213-c167fe556f98?q=80&w=800',
+        image: 'https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800',
         images: [
             'https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800',
             'https://images.unsplash.com/photo-1744472457504-f99a96ecbd3e?q=80&w=800',
             'https://images.unsplash.com/photo-1761222101900-9c9e34fac2ce?q=80&w=800',
             'https://images.unsplash.com/photo-1721103428054-6bcf4f655594?q=80&w=800',
             'https://images.unsplash.com/photo-1721206624468-2b3496c3bcfc?q=80&w=800',
-            'https://images.unsplash.com/photo-1725368844213-c167fe556f98?q=80&w=800'
+            'https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800'
         ]
     },
     {
@@ -35,8 +35,8 @@ const collections = [
     },
     {
         id: 'anel',
-        name: 'Anéis',
-        image: 'https://images.unsplash.com/photo-1627293509201-cd0c780043e6?q=80&w=800',
+        name: 'Alianças',
+        image: 'https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800',
         images: [
             'https://images.unsplash.com/photo-1627293509201-cd0c780043e6?q=80&w=800',
             'https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800',
@@ -49,14 +49,14 @@ const collections = [
     {
         id: 'bracelete',
         name: 'Braceletes',
-        image: 'https://images.unsplash.com/photo-1508022909583-69228d7b2f8f?q=80&w=800',
+        image: 'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
         images: [
-            'https://images.unsplash.com/photo-1708221235482-a6e2a807198f?q=80&w=800',
+            'https://images.unsplash.com/photo-1762232977931-2e3f5949b2aa?q=80&w=800',
             'https://images.unsplash.com/photo-1728646998199-127b357a464d?q=80&w=800',
             'https://images.unsplash.com/photo-1741071520904-37ef3c0fea09?q=80&w=800',
-            'https://images.unsplash.com/photo-1597006354775-2955b15ec026?q=80&w=800',
             'https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800',
-            'https://images.unsplash.com/photo-1508022909583-69228d7b2f8f?q=80&w=800'
+            'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
+            'https://images.unsplash.com/photo-1713934097808-e8d32fca0c8b?q=80&w=800'
         ]
     },
     {
@@ -66,7 +66,7 @@ const collections = [
         images: [
             'https://images.unsplash.com/photo-1769615989591-123379ee8f5a?q=80&w=800',
             'https://images.unsplash.com/photo-1763256614647-14abbc578252?q=80&w=800',
-            'https://images.unsplash.com/photo-1771660715521-49e21698862c?q=80&w=800',
+            'https://images.unsplash.com/photo-1626085664138-9974ba8fb971?q=80&w=800',
             'https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800',
             'https://images.unsplash.com/photo-1769615989587-0c15241194d7?q=80&w=800',
             'https://images.unsplash.com/photo-1606906957131-ecf341381519?q=80&w=800'
