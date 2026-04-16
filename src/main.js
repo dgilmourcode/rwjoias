@@ -1,7 +1,9 @@
-/* ============================================
-   IMPORTAR ESTILOS (Padrão Vite)
-   ============================================ */
 import './style.css';
+
+/* ============================================
+   VARIÁVEL GLOBAL DO LIGHTBOX
+   ============================================ */
+let currentLightboxIndex = 0;
 
 /* ============================================
    DADOS DAS COLEÇÕES
@@ -16,8 +18,6 @@ const collections = [
             'https://images.unsplash.com/photo-1744472457504-f99a96ecbd3e?q=80&w=800',
             'https://images.unsplash.com/photo-1761222101900-9c9e34fac2ce?q=80&w=800',
             'https://images.unsplash.com/photo-1721103428054-6bcf4f655594?q=80&w=800',
-            'https://images.unsplash.com/photo-1721206624468-2b3496c3bcfc?q=80&w=800',
-            'https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800'
         ]
     },
     {
@@ -29,8 +29,6 @@ const collections = [
             'https://images.unsplash.com/photo-1626422222400-3868e5a7ce33?q=80&w=800',
             'https://images.unsplash.com/photo-1602782574269-8b0ee1844ccf?q=80&w=800',
             'https://images.unsplash.com/photo-1623699654653-5f03c0168a6a?q=80&w=800',
-            'https://images.unsplash.com/photo-1731406322264-dac59f83828b?q=80&w=800',
-            'https://images.unsplash.com/photo-1728647771865-636b715674f4?q=80&w=800'
         ]
     },
     {
@@ -42,8 +40,6 @@ const collections = [
             'https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800',
             'https://images.unsplash.com/photo-1481980235850-66e47651e431?q=80&w=800',
             'https://images.unsplash.com/photo-1591209608777-fb022eac7112?q=80&w=800',
-            'https://images.unsplash.com/photo-1686538246844-f3ca82434d95?q=80&w=800',
-            'https://images.unsplash.com/photo-1614606140245-2c33ece9e2cf?q=80&w=800'
         ]
     },
     {
@@ -55,8 +51,6 @@ const collections = [
             'https://images.unsplash.com/photo-1728646998199-127b357a464d?q=80&w=800',
             'https://images.unsplash.com/photo-1741071520904-37ef3c0fea09?q=80&w=800',
             'https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800',
-            'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
-            'https://images.unsplash.com/photo-1713934097808-e8d32fca0c8b?q=80&w=800'
         ]
     },
     {
@@ -68,8 +62,6 @@ const collections = [
             'https://images.unsplash.com/photo-1763256614647-14abbc578252?q=80&w=800',
             'https://images.unsplash.com/photo-1626085664138-9974ba8fb971?q=80&w=800',
             'https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800',
-            'https://images.unsplash.com/photo-1769615989587-0c15241194d7?q=80&w=800',
-            'https://images.unsplash.com/photo-1606906957131-ecf341381519?q=80&w=800'
         ]
     },
     {
@@ -81,14 +73,12 @@ const collections = [
             'https://images.unsplash.com/photo-1612720819442-e07b5a486e48?q=80&w=800',
             'https://images.unsplash.com/photo-1708220040824-b273dd0a17cc?q=80&w=800',
             'https://images.unsplash.com/photo-1693212793204-bcea856c75fe?q=80&w=800',
-            'https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800',
-            'https://images.unsplash.com/photo-1713004539634-a6694a83f3d9?q=80&w=800'
         ]
     }
 ];
 
 /* ============================================
-   DADOS DA GALERIA (IMAGENS ESTÁVEIS)
+   DADOS DA GALERIA
    ============================================ */
 const galleryImages = [
     'https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800',
@@ -99,72 +89,160 @@ const galleryImages = [
     'https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800',
     'https://images.unsplash.com/photo-1616837874254-8d5aaa63e273?q=80&w=800',
     'https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?q=80&w=800',
-    'https://images.unsplash.com/photo-1643898191301-827756a7c855?q=80&w=800',
-    'https://images.unsplash.com/photo-1641284373694-f80eed6d29c7?q=80&w=800',
-    'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
-    'https://images.unsplash.com/photo-1575863062476-51cd2be1af0f?q=80&w=800',
 ];
-
 
 /* ============================================
    RENDERIZAR COLEÇÕES
    ============================================ */
 function renderCollections() {
     const grid = document.getElementById('collections-grid');
-    if (!grid) return;
+    if (!grid) {
+        console.warn('⚠️ Elemento #collections-grid não encontrado');
+        return;
+    }
     
     grid.innerHTML = collections.map((collection, index) => `
-        <div class="group relative overflow-hidden rounded-xl cursor-pointer card-hover reveal" 
-             style="transition-delay: ${index * 50}ms"
-             onclick="window.openModal('${collection.id}')">
-            <div class="aspect-square overflow-hidden">
-                <img src="${collection.image}" alt="${collection.name}" 
-                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+        <div class="collection-card reveal group" style="transition-delay: ${index * 100}ms" data-collection-id="${collection.id}">
+            <div class="aspect-square overflow-hidden bg-nude">
+                <img src="${collection.image}" alt="${collection.name}" class="w-full h-full object-cover">
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6">
-                <h3 class="font-cinzel text-xl font-bold text-white mb-1">${collection.name}</h3>
-                <p class="text-gold-400 text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+            <div class="overlay"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 class="font-serif text-xl font-medium mb-1">${collection.name}</h3>
+                <p class="text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 text-gold-light">
                     Ver coleção →
                 </p>
             </div>
-            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gold-500/20 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                </svg>
-            </div>
         </div>
     `).join('');
+    
+    // Adiciona eventos de clique para as coleções
+    setupCollectionListeners();
+}
+
+function setupCollectionListeners() {
+    document.querySelectorAll('.collection-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const collectionId = card.dataset.collectionId;
+            if (collectionId) openModal(collectionId);
+        });
+    });
 }
 
 /* ============================================
    RENDERIZAR GALERIA
    ============================================ */
 function renderGallery() {
-    const grid = document.getElementById('gallery-grid');
-    if (!grid) return;
+    const container = document.getElementById('gallery-horizontal');
+    if (!container) {
+        console.warn('⚠️ Elemento #gallery-horizontal não encontrado');
+        return;
+    }
     
-    grid.innerHTML = galleryImages.map((image, index) => `
-        <div class="group relative overflow-hidden rounded-lg reveal" style="transition-delay: ${index * 50}ms">
-            <div class="aspect-square overflow-hidden bg-dark-700">
-                <img src="${image}" alt="Galeria RW Joias" 
-                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-            </div>
-            <div class="absolute inset-0 bg-gold-500/0 group-hover:bg-gold-500/20 transition-colors duration-300"></div>
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <div class="w-12 h-12 rounded-full bg-gold-500 flex items-center justify-center">
-                    <svg class="w-6 h-6 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+    container.innerHTML = galleryImages.map((image, index) => `
+        <div class="gallery-item-horizontal reveal cursor-pointer" 
+             style="transition-delay: ${index * 50}ms"
+             data-gallery-index="${index}">
+            <img src="${image}" alt="Galeria RW Joias" loading="lazy">
+            <div class="absolute inset-0 bg-charcoal/0 hover:bg-charcoal/20 transition-all duration-300 flex items-center justify-center pointer-events-none">
+                <div class="w-12 h-12 rounded-full bg-white/0 hover:bg-white/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-all duration-300 scale-50 hover:scale-100">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                     </svg>
                 </div>
             </div>
         </div>
     `).join('');
+    
+    setupGalleryListeners();
+}
+
+function setupGalleryListeners() {
+    document.querySelectorAll('.gallery-item-horizontal').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (e.target.closest('svg')) return;
+            const index = parseInt(item.dataset.galleryIndex);
+            if (!isNaN(index)) openLightbox(index);
+        });
+    });
 }
 
 /* ============================================
-   FUNÇÕES DE MODAL (Expostas globalmente)
+   LIGHTBOX FUNCTIONS
+   ============================================ */
+function openLightbox(index) {
+    currentLightboxIndex = index;
+    const modal = document.getElementById('lightbox-modal');
+    const image = document.getElementById('lightbox-image');
+    const counter = document.getElementById('lightbox-counter');
+    
+    if (!modal || !image) {
+        console.warn('⚠️ Elementos do lightbox não encontrados');
+        return;
+    }
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    
+    updateLightboxImage();
+    
+    image.style.transition = 'none';
+    image.style.transform = 'scale(0.9)';
+    image.style.opacity = '0';
+    
+    setTimeout(() => {
+        image.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease';
+        image.style.transform = 'scale(1)';
+        image.style.opacity = '1';
+    }, 10);
+}
+
+function closeLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const image = document.getElementById('lightbox-image');
+    
+    if (!modal || !image) return;
+    
+    image.style.transform = 'scale(0.95)';
+    image.style.opacity = '0';
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+function navigateLightbox(direction) {
+    currentLightboxIndex += direction;
+    
+    if (currentLightboxIndex < 0) {
+        currentLightboxIndex = galleryImages.length - 1;
+    } else if (currentLightboxIndex >= galleryImages.length) {
+        currentLightboxIndex = 0;
+    }
+    
+    updateLightboxImage();
+}
+
+function updateLightboxImage() {
+    const image = document.getElementById('lightbox-image');
+    const counter = document.getElementById('lightbox-counter');
+    
+    if (!image) return;
+    
+    image.style.opacity = '0.5';
+    
+    setTimeout(() => {
+        image.src = galleryImages[currentLightboxIndex];
+        counter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
+        image.style.opacity = '1';
+    }, 150);
+}
+
+/* ============================================
+   MODAL DE COLEÇÕES
    ============================================ */
 function openModal(collectionId) {
     const collection = collections.find(c => c.id === collectionId);
@@ -178,7 +256,7 @@ function openModal(collectionId) {
 
     modalTitle.textContent = collection.name;
     modalContent.innerHTML = collection.images.map(img => `
-        <div class="aspect-square rounded-lg overflow-hidden bg-dark-700">
+        <div class="aspect-square rounded-xl overflow-hidden bg-nude">
             <img src="${img}" alt="${collection.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
         </div>
     `).join('');
@@ -190,76 +268,77 @@ function openModal(collectionId) {
 function closeModal() {
     const modal = document.getElementById('collection-modal');
     if (!modal) return;
-    
     modal.classList.add('hidden');
     document.body.style.overflow = '';
 }
 
-/* Expor funções globalmente para onclick do HTML */
+/* ============================================
+   EXPOSIÇÃO GLOBAL (PARA HTML onclick)
+   ============================================ */
 window.openModal = openModal;
 window.closeModal = closeModal;
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
+window.navigateLightbox = navigateLightbox;
 
 /* ============================================
-   FECHAR MODAL COM TECLA ESC
+   EVENT LISTENERS GLOBAIS
    ============================================ */
+// Fechar modais com ESC
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') {
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const collectionModal = document.getElementById('collection-modal');
+        
+        if (lightboxModal && !lightboxModal.classList.contains('hidden')) {
+            closeLightbox();
+        } else if (collectionModal && !collectionModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    }
 });
 
-/* ============================================
-   EFEITO DE SCROLL NA NAVBAR
-   ============================================ */
-const navbar = document.getElementById('navbar');
-const floatingCta = document.getElementById('floating-cta');
+// Lightbox: clique no backdrop fecha
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('lightbox-modal');
+    if (modal && !modal.classList.contains('hidden') && e.target === modal.querySelector('[onclick]')) {
+        closeLightbox();
+    }
+});
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+// Lightbox: navegação por botões
+document.addEventListener('DOMContentLoaded', () => {
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
     
-    if (navbar) {
-        if (currentScroll > 100) {
-            navbar.classList.remove('opacity-0', '-translate-y-full');
-        } else {
-            navbar.classList.add('opacity-0', '-translate-y-full');
-        }
-    }
-
-    if (floatingCta) {
-        if (currentScroll > 100) {
-            floatingCta.classList.remove('opacity-0', 'translate-y-10');
-        } else {
-            floatingCta.classList.add('opacity-0', 'translate-y-10');
-        }
-    }
+    prevBtn?.addEventListener('click', () => navigateLightbox(-1));
+    nextBtn?.addEventListener('click', () => navigateLightbox(1));
 });
 
+// Swipe para mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+    const modal = document.getElementById('lightbox-modal');
+    if (!modal || modal.classList.contains('hidden')) return;
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    const modal = document.getElementById('lightbox-modal');
+    if (!modal || modal.classList.contains('hidden')) return;
+    touchEndX = e.changedTouches[0].screenX;
+    
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+        diff > 0 ? navigateLightbox(1) : navigateLightbox(-1);
+    }
+}, { passive: true });
+
 /* ============================================
-   MENU MOBILE
+   ANIMAÇÕES E UTILITÁRIOS
    ============================================ */
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-
-if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-
-    // Fechar menu ao clicar em um link
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-    });
-}
-
-/* ============================================
-   ANIMAÇÃO DE SCROLL REVEAL
-   ============================================ */
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -267,30 +346,30 @@ const observer = new IntersectionObserver((entries) => {
             observer.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1 });
 
 /* ============================================
-   ENVIO DE FORMULÁRIO
+   NAVBAR E MENU MOBILE
    ============================================ */
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const btn = e.target.querySelector('button[type="submit"]');
-        if (!btn) return;
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+    if (window.pageYOffset > 50) {
+        navbar.classList.add('shadow-lg', 'shadow-charcoal/5');
+    } else {
+        navbar.classList.remove('shadow-lg', 'shadow-charcoal/5');
+    }
+}, { passive: true });
 
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<span>Mensagem Enviada!</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
-        btn.classList.add('bg-green-600');
-        btn.classList.remove('bg-gradient-gold');
-        
-        setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.classList.remove('bg-green-600');
-            btn.classList.add('bg-gradient-gold');
-            e.target.reset();
-        }, 3000);
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
     });
 }
 
@@ -298,27 +377,26 @@ if (contactForm) {
    INICIALIZAÇÃO
    ============================================ */
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('✅ RW Joias - Iniciando...');
+    
     renderCollections();
     renderGallery();
     
-    // Observar todos os elementos com classe 'reveal'
-    document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    document.querySelectorAll('.grid').forEach(grid => {
+        grid.querySelectorAll('.reveal').forEach((item, index) => {
+            item.style.transitionDelay = `${index * 100}ms`;
+        });
     });
-});
-
-/* ============================================
-   SCROLL SUAVE PARA LINKS ÂNCORA
-   ============================================ */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     });
+    
+    console.log('✅ RW Joias - Pronto!');
 });

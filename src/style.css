@@ -1,80 +1,83 @@
 /* ============================================
-   1. IMPORTS EXTERNOS (ANTES DO TAILWIND!)
-   ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
-/* ============================================
-   2. TAILWIND DIRECTIVES - SEMPRE NO TOPO!
-   Para Tailwind v4+, use @import ao invés de @tailwind
+   TAILWIND CSS v4 + CUSTOM STYLES
    ============================================ */
 @import "tailwindcss";
 
 /* ============================================
-   3. ESTILOS BASE (@layer base)
-   Sobrescreve estilos padrão do navegador/Tailwind
+   🎨 THEME - CORES PREMIUM
+   ============================================ */
+@theme inline {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Paleta Premium - Tons Suaves */
+  --color-cream: #FAF9F6;
+  /* Fundo principal */
+  --color-nude: #F5F0EB;
+  /* Secundário */
+  --color-champagne: #E8E0D5;
+  /* Destaque */
+  --color-gold: #D4AF37;
+  /* Dourado premium */
+  --color-gold-light: #E5C56B;
+  /* Dourado claro */
+  --color-charcoal: #2C2C2C;
+  /* Texto principal */
+  --color-charcoal-light: #5A5A5A;
+  /* Texto secundário */
+}
+
+/* ============================================
+   🧱 BASE & RESET
    ============================================ */
 @layer base {
-
-  /* Scrollbar escondida global */
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    background-color: #0a0a0a;
-    font-family: 'Inter', sans-serif;
+    background: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Suaviza scroll */
-  html {
-    scroll-behavior: smooth;
+  ::selection {
+    background: var(--color-gold);
+    color: white;
+  }
+
+  /* Scrollbar personalizada */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-nude);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-champagne);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold);
   }
 }
 
 /* ============================================
-   4. COMPONENTES REUTILIZÁVEIS (@layer components)
-   Classes que você usa várias vezes no HTML
+   ✨ ANIMAÇÕES GLOBAIS
    ============================================ */
-@layer components {
+@layer utilities {
 
-  /* Gradiente dourado para texto */
-  .text-gradient-gold {
-    background: linear-gradient(135deg, #F0DEAA 0%, #D4A532 50%, #B8860B 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Gradiente dourado para fundo */
-  .bg-gradient-gold {
-    background: linear-gradient(135deg, #D4A532 0%, #B8860B 50%, #8B6914 100%);
-  }
-
-  /* Borda com gradiente dourado */
-  .border-gradient-gold {
-    border-image: linear-gradient(135deg, #D4A532, #B8860B) 1;
-  }
-
-  /* Efeito vidro (glassmorphism) */
-  .glass-effect {
-    background: rgba(26, 26, 26, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  /* Overlay do hero */
-  .hero-overlay {
-    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.8) 100%);
-  }
-
-  /* Animação de revelação no scroll */
+  /* Scroll Reveal */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal.active {
@@ -82,45 +85,119 @@
     transform: translateY(0);
   }
 
-  /* Efeito hover em cards */
-  .card-hover {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Float Animation */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  .card-hover:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(212, 165, 50, 0.2);
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
-  /* Animação de entrada do modal */
-  .modal-enter {
-    animation: modalEnter 0.3s ease-out forwards;
+  /* Fade In Up */
+  .animate-fade-in-up {
+    animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* Efeito shimmer para loading/destaque */
-  .shimmer-bg {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    background-size: 200% 100%;
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Gradient text fix para Safari */
-  .gradient-text-fix {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+  /* Icon Hover Rotate */
+  .group:hover i {
+    animation: iconRotate 0.6s ease;
   }
-}
 
+  @keyframes iconRotate {
 
+    0%,
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
 
-/* ============================================
-   5. UTILITIES CUSTOMIZADAS (@layer utilities)
-   Classes pequenas e específicas
-   ============================================ */
-@layer utilities {
+    50% {
+      transform: rotate(10deg) scale(1.1);
+    }
+  }
 
-  /* Esconder scrollbar em elemento específico */
+  /* Star Pulse */
+  .group:hover .fa-star {
+    animation: starPulse 0.6s ease;
+  }
+
+  @keyframes starPulse {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+  /* Badge Float */
+  .badge-float {
+    animation: badgeFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes badgeFloat {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* Shine Effect */
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+  }
+
+  .shine-effect:hover::before {
+    left: 150%;
+  }
+
+  /* Text Balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide Scrollbar */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -129,21 +206,100 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  /* Text shadow para legibilidade */
-  .text-shadow {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
 }
 
 /* ============================================
-   6. KEYFRAMES (ANIMAÇÕES)
-   Fora dos @layer porque são referenciadas
+   🧩 COMPONENTES
    ============================================ */
-@keyframes modalEnter {
+
+/* Collection Card */
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+
+.collection-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.collection-card img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collection-card:hover img {
+  transform: scale(1.05);
+}
+
+.collection-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(44, 44, 44, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.collection-card:hover .overlay {
+  opacity: 1;
+}
+
+/* Gallery Horizontal Item */
+.gallery-item-horizontal {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 400px;
+  scroll-snap-align: start;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item-horizontal:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item-horizontal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item-horizontal:hover img {
+  transform: scale(1.08);
+}
+
+/* Lightbox Modal */
+#lightbox-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#lightbox-modal:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+#lightbox-image {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+#lightbox-image[src] {
+  animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   to {
@@ -152,50 +308,140 @@
   }
 }
 
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+#lightbox-modal button {
+  transition: transform 0.2s ease;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
-  }
+#lightbox-modal button:hover {
+  transform: scale(1.1);
 }
 
-@keyframes floatSlow {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.03);
-  }
+/* Collection Modal */
+#collection-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
-.float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
+#collection-modal:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+#collection-modal img {
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+}
+
+#collection-modal img:hover {
+  transform: scale(1.02);
+}
+
+/* Testimonial Card Shine */
+.testimonial-card {
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.testimonial-card:hover::before {
+  left: 100%;
 }
 
 /* ============================================
-   7. MEDIA QUERIES E AJUSTES RESPONSIVOS
+   🎯 UTILITÁRIOS PERSONALIZADOS
    ============================================ */
-@media (max-width: 640px) {
-  .hero-title {
-    font-size: 2.5rem;
-    line-height: 1.2;
+.glass {
+  background: rgba(250, 249, 246, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   📱 RESPONSIVIDADE EXTRA (se necessário)
+   ============================================ */
+@media (max-width: 768px) {
+  .gallery-item-horizontal {
+    width: 260px;
+    height: 340px;
   }
+
+  .collection-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* ============================================
+   FOOTER
+   ============================================ */
+/* Footer hover effects */
+footer a {
+  position: relative;
+}
+
+footer a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+footer a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Payment Icons - Hover Glow */
+footer [title]:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+/* PIX Badge Special Style */
+footer .fa-cc-visa {
+  color: #333df8;
+}
+
+footer .fa-cc-mastercard {
+  color: #EB001B;
+}
+
+footer .fa-cc-amex {
+  color: #006FCF;
+}
+
+footer .group:hover .fa-cc-visa,
+footer .group:hover .fa-cc-mastercard,
+footer .group:hover .fa-cc-amex {
+  filter: brightness(1.2);
 }
