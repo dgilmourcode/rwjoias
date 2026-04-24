@@ -426,22 +426,3 @@ footer [title]:hover {
   transform: translateY(-2px);
   transition: transform 0.2s ease;
 }
-
-/* PIX Badge Special Style */
-footer .fa-cc-visa {
-  color: #333df8;
-}
-
-footer .fa-cc-mastercard {
-  color: #EB001B;
-}
-
-footer .fa-cc-amex {
-  color: #006FCF;
-}
-
-footer .group:hover .fa-cc-visa,
-footer .group:hover .fa-cc-mastercard,
-footer .group:hover .fa-cc-amex {
-  filter: brightness(1.2);
-}
