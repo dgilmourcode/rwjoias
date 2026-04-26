@@ -1,0 +1,312 @@
+{
+  "collections": [
+    {
+      "id": "pulseira",
+      "name": "Pulseiras",
+      "image": "https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800",
+          "titulo": "Pulseira Grumet 18k",
+          "preco": "R$ 4.250,00",
+          "material": "Ouro 18k legítimo",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1744472457504-f99a96ecbd3e?q=80&w=800",
+          "titulo": "Pulseira Riviera",
+          "preco": "R$ 2.800,00",
+          "material": "Prata 925 com Zircônias",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1761222101900-9c9e34fac2ce?q=80&w=800",
+          "titulo": "Pulseira Italiana",
+          "preco": "R$ 5.900,00",
+          "material": "Ouro 18k Maciço",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1721103428054-6bcf4f655594?q=80&w=800",
+          "titulo": "Pulseira Masculina Slim",
+          "preco": "R$ 3.500,00",
+          "material": "Ouro 18k 750",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1721206624468-2b3496c3bcfc?q=80&w=800",
+          "titulo": "Pulseira de Elos",
+          "preco": "R$ 1.900,00",
+          "material": "Prata 925 Envelhecida",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800",
+          "titulo": "Pulseira Lux",
+          "preco": "R$ 6.200,00",
+          "material": "Ouro 18k polido",
+          "disponibilidade": "Pronta Entrega"
+        }
+      ]
+    },
+    {
+      "id": "colar",
+      "name": "Colares",
+      "image": "https://images.unsplash.com/photo-1602782574269-8b0ee1844ccf?q=80&w=800",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800",
+          "titulo": "Cordão Veneziana",
+          "preco": "R$ 3.100,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1626422222400-3868e5a7ce33?q=80&w=800",
+          "titulo": "Colar de Pérolas",
+          "preco": "R$ 1.450,00",
+          "material": "Pérola Natural e Fecho em Prata",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1602782574269-8b0ee1844ccf?q=80&w=800",
+          "titulo": "Corrente Cartier",
+          "preco": "R$ 4.800,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1623699654653-5f03c0168a6a?q=80&w=800",
+          "titulo": "Colar Ponto de Luz",
+          "preco": "R$ 950,00",
+          "material": "Prata 925 com Cristal",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1731406322264-dac59f83828b?q=80&w=800",
+          "titulo": "Gargantilha Fita",
+          "preco": "R$ 2.700,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1728647771865-636b715674f4?q=80&w=800",
+          "titulo": "Cordão Baiano",
+          "preco": "R$ 5.200,00",
+          "material": "Ouro 18k Maciço",
+          "disponibilidade": "Sob Encomenda"
+        }
+      ]
+    },
+    {
+      "id": "anel",
+      "name": "Alianças",
+      "image": "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-1627293509201-cd0c780043e6?q=80&w=800",
+          "titulo": "Aliança Classic",
+          "preco": "R$ 2.200,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "7 dias úteis"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
+          "titulo": "Aliança Anatômica",
+          "preco": "R$ 2.900,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "7 dias úteis"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1481980235850-66e47651e431?q=80&w=800",
+          "titulo": "Par de Alianças Luxo",
+          "preco": "R$ 4.500,00",
+          "material": "Ouro 18k Premium",
+          "disponibilidade": "10 dias úteis"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1591209608777-fb022eac7112?q=80&w=800",
+          "titulo": "Aliança Fosca",
+          "preco": "R$ 2.400,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "7 dias úteis"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1686538246844-f3ca82434d95?q=80&w=800",
+          "titulo": "Aliança com Diamantes",
+          "preco": "R$ 5.800,00",
+          "material": "Ouro c/ Diamantes",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1614606140245-2c33ece9e2cf?q=80&w=800",
+          "titulo": "Aliança Slim",
+          "preco": "R$ 1.800,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        }
+      ]
+    },
+    {
+      "id": "bracelete",
+      "name": "Braceletes",
+      "image": "https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-1762232977931-2e3f5949b2aa?q=80&w=800",
+          "titulo": "Bracelete Rígido",
+          "preco": "R$ 3.900,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1728646998199-127b357a464d?q=80&w=800",
+          "titulo": "Bracelete Algema",
+          "preco": "R$ 4.200,00",
+          "material": "Ouro 18k polido",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1741071520904-37ef3c0fea09?q=80&w=800",
+          "titulo": "Bracelete Torcido",
+          "preco": "R$ 2.100,00",
+          "material": "Prata 925 de Lei",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800",
+          "titulo": "Bracelete Modern",
+          "preco": "R$ 3.600,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800",
+          "titulo": "Bracelete Classic",
+          "preco": "R$ 3.800,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1713934097808-e8d32fca0c8b?q=80&w=800",
+          "titulo": "Bracelete cravejado",
+          "preco": "R$ 5.400,00",
+          "material": "Ouro com Zircônias",
+          "disponibilidade": "Sob Encomenda"
+        }
+      ]
+    },
+    {
+      "id": "pingente",
+      "name": "Pingentes",
+      "image": "https://images.unsplash.com/photo-1763256614647-14abbc578252?q=80&w=800",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-1769615989591-123379ee8f5a?q=80&w=800",
+          "titulo": "Pingente Cruz",
+          "preco": "R$ 850,00",
+          "material": "Ouro 18k Maciço",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1763256614647-14abbc578252?q=80&w=800",
+          "titulo": "Pingente Medalha",
+          "preco": "R$ 1.200,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1626085664138-9974ba8fb971?q=80&w=800",
+          "titulo": "Pingente Letra",
+          "preco": "R$ 600,00",
+          "material": "Prata 925 com Ródio",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800",
+          "titulo": "Pingente Placa",
+          "preco": "R$ 1.500,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1769615989587-0c15241194d7?q=80&w=800",
+          "titulo": "Pingente Coração",
+          "preco": "R$ 750,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1606906957131-ecf341381519?q=80&w=800",
+          "titulo": "Pingente Especial",
+          "preco": "R$ 2.200,00",
+          "material": "Ouro 18k trabalhado",
+          "disponibilidade": "Sob Encomenda"
+        }
+      ]
+    },
+    {
+      "id": "brinco",
+      "name": "Brincos",
+      "image": "https://images.unsplash.com/photo-1612720819442-e07b5a486e48?q=80&w=800",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?q=80&w=800",
+          "titulo": "Brinco Argola",
+          "preco": "R$ 1.400,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1612720819442-e07b5a486e48?q=80&w=800",
+          "titulo": "Brinco Ponto de Luz",
+          "preco": "R$ 800,00",
+          "material": "Ouro 18k e Zircônia",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1708220040824-b273dd0a17cc?q=80&w=800",
+          "titulo": "Brinco Pendente",
+          "preco": "R$ 2.500,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Sob Encomenda"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1693212793204-bcea856c75fe?q=80&w=800",
+          "titulo": "Brinco Pérola",
+          "preco": "R$ 1.100,00",
+          "material": "Prata c/ Pérola Natural",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800",
+          "titulo": "Brinco Bolinha",
+          "preco": "R$ 450,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "Pronta Entrega"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1713004539634-a6694a83f3d9?q=80&w=800",
+          "titulo": "Argola Cravejada",
+          "preco": "R$ 3.200,00",
+          "material": "Ouro 18k premium",
+          "disponibilidade": "Sob Encomenda"
+        }
+      ]
+    }
+  ],
+  "galleryImages": [
+    "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800",
+    "https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800",
+    "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
+    "https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800",
+    "https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800",
+    "https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800",
+    "https://images.unsplash.com/photo-1616837874254-8d5aaa63e273?q=80&w=800",
+    "https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?q=80&w=800",
+    "https://images.unsplash.com/photo-1643898191301-827756a7c855?q=80&w=800",
+    "https://images.unsplash.com/photo-1641284373694-f80eed6d29c7?q=80&w=800",
+    "https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800",
+    "https://images.unsplash.com/photo-1575863062476-51cd2be1af0f?q=80&w=800"
+  ]
+}

@@ -1,419 +1,283 @@
 import './style.css';
 
 /* ============================================
-   VARIÁVEL GLOBAL DO LIGHTBOX
+   VARIÁVEIS GLOBAIS
    ============================================ */
 let currentLightboxIndex = 0;
+let collections = [];
+let galleryImages = [];
 
 /* ============================================
-   DADOS DAS COLEÇÕES
+   CARREGAMENTO DE DADOS
    ============================================ */
-const collections = [
-    {
-        id: 'pulseira',
-        name: 'Pulseiras',
-        image: 'https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800',
-        images: [
-            'https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800',
-            'https://images.unsplash.com/photo-1744472457504-f99a96ecbd3e?q=80&w=800',
-            'https://images.unsplash.com/photo-1761222101900-9c9e34fac2ce?q=80&w=800',
-            'https://images.unsplash.com/photo-1721103428054-6bcf4f655594?q=80&w=800',
-            'https://images.unsplash.com/photo-1721206624468-2b3496c3bcfc?q=80&w=800',
-            'https://images.unsplash.com/photo-1728647771933-9946a13e29f6?q=80&w=800'
-        ]
-    },
-    {
-        id: 'colar',
-        name: 'Colares',
-        image: 'https://images.unsplash.com/photo-1602782574269-8b0ee1844ccf?q=80&w=800',
-        images: [
-            'https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800',
-            'https://images.unsplash.com/photo-1626422222400-3868e5a7ce33?q=80&w=800',
-            'https://images.unsplash.com/photo-1602782574269-8b0ee1844ccf?q=80&w=800',
-            'https://images.unsplash.com/photo-1623699654653-5f03c0168a6a?q=80&w=800',
-            'https://images.unsplash.com/photo-1731406322264-dac59f83828b?q=80&w=800',
-            'https://images.unsplash.com/photo-1728647771865-636b715674f4?q=80&w=800'
-        ]
-    },
-    {
-        id: 'anel',
-        name: 'Alianças',
-        image: 'https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800',
-        images: [
-            'https://images.unsplash.com/photo-1627293509201-cd0c780043e6?q=80&w=800',
-            'https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800',
-            'https://images.unsplash.com/photo-1481980235850-66e47651e431?q=80&w=800',
-            'https://images.unsplash.com/photo-1591209608777-fb022eac7112?q=80&w=800',
-            'https://images.unsplash.com/photo-1686538246844-f3ca82434d95?q=80&w=800',
-            'https://images.unsplash.com/photo-1614606140245-2c33ece9e2cf?q=80&w=800'
-        ]
-    },
-    {
-        id: 'bracelete',
-        name: 'Braceletes',
-        image: 'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
-        images: [
-            'https://images.unsplash.com/photo-1762232977931-2e3f5949b2aa?q=80&w=800',
-            'https://images.unsplash.com/photo-1728646998199-127b357a464d?q=80&w=800',
-            'https://images.unsplash.com/photo-1741071520904-37ef3c0fea09?q=80&w=800',
-            'https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800',
-            'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
-            'https://images.unsplash.com/photo-1713934097808-e8d32fca0c8b?q=80&w=800'
-        ]
-    },
-    {
-        id: 'pingente',
-        name: 'Pingentes',
-        image: 'https://images.unsplash.com/photo-1763256614647-14abbc578252?q=80&w=800',
-        images: [
-            'https://images.unsplash.com/photo-1769615989591-123379ee8f5a?q=80&w=800',
-            'https://images.unsplash.com/photo-1763256614647-14abbc578252?q=80&w=800',
-            'https://images.unsplash.com/photo-1626085664138-9974ba8fb971?q=80&w=800',
-            'https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800',
-            'https://images.unsplash.com/photo-1769615989587-0c15241194d7?q=80&w=800',
-            'https://images.unsplash.com/photo-1606906957131-ecf341381519?q=80&w=800'
-        ]
-    },
-    {
-        id: 'brinco',
-        name: 'Brincos',
-        image: 'https://images.unsplash.com/photo-1612720819442-e07b5a486e48?q=80&w=800',
-        images: [
-            'https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?q=80&w=800',
-            'https://images.unsplash.com/photo-1612720819442-e07b5a486e48?q=80&w=800',
-            'https://images.unsplash.com/photo-1708220040824-b273dd0a17cc?q=80&w=800',
-            'https://images.unsplash.com/photo-1693212793204-bcea856c75fe?q=80&w=800',
-            'https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800',
-            'https://images.unsplash.com/photo-1713004539634-a6694a83f3d9?q=80&w=800'
-        ]
+async function loadData() {
+    try {
+        // Caminho relativo funciona tanto em dev quanto em production
+        const response = await fetch('./data.json');
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        collections = data.collections || [];
+        galleryImages = data.galleryImages || [];
+
+        console.log('Dados carregados com sucesso:', {
+            collections: collections.length,
+            gallery: galleryImages.length
+        });
+
+        // Renderiza após carregar os dados
+        renderCollections();
+        renderGallery();
+
+    } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        // Fallback para não quebrar a página
+        collections = [];
+        galleryImages = [];
     }
-];
+}
 
 /* ============================================
-   DADOS DA GALERIA (IMAGENS ESTÁVEIS)
-   ============================================ */
-const galleryImages = [
-    'https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800',
-    'https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800',
-    'https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800',
-    'https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800',
-    'https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800',
-    'https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800',
-    'https://images.unsplash.com/photo-1616837874254-8d5aaa63e273?q=80&w=800',
-    'https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?q=80&w=800',
-    'https://images.unsplash.com/photo-1643898191301-827756a7c855?q=80&w=800',
-    'https://images.unsplash.com/photo-1641284373694-f80eed6d29c7?q=80&w=800',
-    'https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800',
-    'https://images.unsplash.com/photo-1575863062476-51cd2be1af0f?q=80&w=800',
-];
-
-
-/* ============================================
-   RENDERIZAR COLEÇÕES
+   RENDERIZAÇÃO DE COLEÇÕES
    ============================================ */
 function renderCollections() {
     const grid = document.getElementById('collections-grid');
-    if (!grid) {
-        console.warn('⚠️ Elemento #collections-grid não encontrado');
+    if (!grid) return;
+
+    if (collections.length === 0) {
+        grid.innerHTML = '<p class="text-center text-gray-500">Carregando coleções...</p>';
         return;
     }
-    
-    grid.innerHTML = collections.map((collection, index) => `
-        <div class="collection-card reveal group" style="transition-delay: ${index * 100}ms" data-collection-id="${collection.id}">
-            <div class="aspect-square overflow-hidden bg-nude">
-                <img src="${collection.image}" alt="${collection.name}" class="w-full h-full object-cover">
+
+    grid.innerHTML = collections.map((c) => `
+        <div onclick="openModal('${c.id}')" class="collection-card reveal group cursor-pointer rounded-xl overflow-hidden shadow-sm bg-white hover:shadow-md transition-all duration-300">
+            <div class="aspect-square overflow-hidden bg-gray-100">
+                <img src="${c.image}" alt="${c.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
             </div>
-            <div class="overlay"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 class="font-serif text-xl font-medium mb-1">${collection.name}</h3>
-                <p class="text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 text-gold-light">
-                    Ver coleção →
-                </p>
+            <div class="p-5">
+                <h3 class="font-serif text-xl font-medium text-gray-800">${c.name}</h3>
+                <p class="text-sm text-gold font-medium mt-1">Explorar <i class="fa-solid fa-arrow-right ml-1"></i></p>
             </div>
         </div>
     `).join('');
-    
-    // Adiciona eventos de clique para as coleções
-    setupCollectionListeners();
-}
-
-function setupCollectionListeners() {
-    document.querySelectorAll('.collection-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const collectionId = card.dataset.collectionId;
-            if (collectionId) openModal(collectionId);
-        });
-    });
 }
 
 /* ============================================
-   RENDERIZAR GALERIA
+   LÓGICA DO MODAL
    ============================================ */
-function renderGallery() {
-    const container = document.getElementById('gallery-horizontal');
-    if (!container) {
-        console.warn('⚠️ Elemento #gallery-horizontal não encontrado');
+function openModal(collectionId) {
+    const modal = document.getElementById('collection-modal');
+    const collection = collections.find(c => c.id === collectionId);
+
+    if (!collection || !modal) {
+        console.error('Coleção não encontrada:', collectionId);
         return;
     }
-    
-    container.innerHTML = galleryImages.map((image, index) => `
-        <div class="gallery-item-horizontal reveal cursor-pointer" 
-             style="transition-delay: ${index * 50}ms"
-             data-gallery-index="${index}">
-            <img src="${image}" alt="Galeria RW Joias" loading="lazy">
-            <div class="absolute inset-0 bg-charcoal/0 hover:bg-charcoal/20 transition-all duration-300 flex items-center justify-center pointer-events-none">
-                <div class="w-12 h-12 rounded-full bg-white/0 hover:bg-white/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-all duration-300 scale-50 hover:scale-100">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
+
+    const items = collection.items;
+
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal()"></div>
+
+            <div class="relative bg-white w-full max-w-6xl max-h-[90vh] rounded-[32px] overflow-hidden shadow-2xl flex flex-col md:flex-row animate-modal-in">
+                
+                <button onclick="closeModal()" class="absolute top-4 right-4 z-[110] w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-all">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+
+                <div class="relative w-full md:w-3/5 bg-[#FBFBFD] h-[350px] md:h-auto overflow-hidden group">
+                    <div class="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth" id="modal-slider">
+                        ${items.map((item) => `
+                            <div class="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-6">
+                                <img src="${item.src}" alt="${item.titulo}" class="max-w-full max-h-full object-contain rounded-xl shadow-lg shadow-black/5" loading="lazy">
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <button onclick="scrollSlider(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white shadow-md">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button onclick="scrollSlider(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white shadow-md">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+                <div class="w-full md:w-2/5 p-8 md:p-12 flex flex-col bg-white overflow-y-auto">
+                    <div id="modal-info-content">
+                        <span class="text-gold font-bold tracking-widest text-[10px] uppercase">Catálogo RW Joias</span>
+                        <h2 id="dynamic-title" class="font-serif text-3xl mt-2 mb-2 text-gray-900">${items[0].titulo}</h2>
+                        
+                        <div class="mb-6">
+                            <span id="dynamic-price" class="text-2xl font-semibold text-charcoal">${items[0].preco}</span>
+                            <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-tighter">Valor aproximado / Consulte gramatura</p>
+                        </div>
+
+                        <div class="space-y-3 mb-8">
+                            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+                                <div>
+                                    <p class="text-[9px] uppercase text-gray-400 font-bold">Descrição</p>
+                                    <p id="dynamic-material" class="text-sm font-medium text-gray-800">${items[0].material}</p>
+                                </div>
+                                <i class="fa-solid fa-gem text-gold/50"></i>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+                                <div>
+                                    <p class="text-[9px] uppercase text-gray-400 font-bold">Disponibilidade</p>
+                                    <p id="dynamic-status" class="text-sm font-medium text-green-600">${items[0].disponibilidade}</p>
+                                </div>
+                                <i class="fa-solid fa-circle-check text-green-500/30"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-6 border-t border-gray-100">
+                        <a id="whatsapp-link" href="#" target="_blank" 
+                           class="w-full bg-black text-white py-4 rounded-full text-sm font-bold hover:bg-gold transition-all flex items-center justify-center gap-2 shadow-xl shadow-black/10 active:scale-95">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Finalizar Compra
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    `).join('');
-    
-    setupGalleryListeners();
+    `;
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    setupModalObserver(collection);
 }
 
-function setupGalleryListeners() {
-    document.querySelectorAll('.gallery-item-horizontal').forEach(item => {
-        item.addEventListener('click', (e) => {
-            if (e.target.closest('svg')) return;
-            const index = parseInt(item.dataset.galleryIndex);
-            if (!isNaN(index)) openLightbox(index);
-        });
-    });
+function setupModalObserver(collection) {
+    const slider = document.getElementById('modal-slider');
+    if (!slider) return;
+
+    const updateUI = () => {
+        const index = Math.round(slider.scrollLeft / slider.offsetWidth);
+        const item = collection.items[index];
+
+        if (item) {
+            document.getElementById('dynamic-title').textContent = item.titulo;
+            document.getElementById('dynamic-price').textContent = item.preco;
+            document.getElementById('dynamic-material').textContent = item.material;
+            document.getElementById('dynamic-status').textContent = item.disponibilidade;
+
+            const notaPedido = `*NOTA DE PEDIDO - RW JOIAS*%0A%0A` +
+                `*Nome:* ${item.titulo}%0A` +
+                `*Preço:* ${item.preco}%0A` +
+                `*Descrição:* ${item.material}%0A` +
+                `*Status:* ${item.disponibilidade}%0A%0A` +
+                `--------------------------------%0A` +
+                `Olá! Gostaria de finalizar a compra deste item.`;
+
+            const waLink = document.getElementById('whatsapp-link');
+            waLink.href = `https://wa.me/5586994888666?text=${notaPedido}`;
+        }
+    };
+
+    slider.addEventListener('scroll', updateUI);
+    updateUI();
 }
+
+window.scrollSlider = (direction) => {
+    const slider = document.getElementById('modal-slider');
+    if (slider) {
+        slider.scrollBy({ left: direction * slider.offsetWidth, behavior: 'smooth' });
+    }
+};
+
+window.closeModal = () => {
+    const modal = document.getElementById('collection-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+};
 
 /* ============================================
-   LIGHTBOX FUNCTIONS
+   GALERIA E LIGHTBOX
    ============================================ */
+function renderGallery() {
+    const container = document.getElementById('gallery-horizontal');
+    if (!container) return;
+
+    if (galleryImages.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500">Carregando galeria...</p>';
+        return;
+    }
+
+    container.innerHTML = galleryImages.map((img, i) => `
+        <div onclick="openLightbox(${i})" class="gallery-item-horizontal reveal cursor-pointer overflow-hidden rounded-xl">
+            <img src="${img}" alt="Galeria ${i + 1}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
+        </div>
+    `).join('');
+}
+
 function openLightbox(index) {
     currentLightboxIndex = index;
     const modal = document.getElementById('lightbox-modal');
     const image = document.getElementById('lightbox-image');
-    const counter = document.getElementById('lightbox-counter');
-    
-    if (!modal || !image) {
-        console.warn('⚠️ Elementos do lightbox não encontrados');
-        return;
-    }
-    
+    if (!modal || !image) return;
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
-    
-    updateLightboxImage();
-    
-    image.style.transition = 'none';
-    image.style.transform = 'scale(0.9)';
-    image.style.opacity = '0';
-    
-    setTimeout(() => {
-        image.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease';
-        image.style.transform = 'scale(1)';
-        image.style.opacity = '1';
-    }, 10);
-}
-
-function closeLightbox() {
-    const modal = document.getElementById('lightbox-modal');
-    const image = document.getElementById('lightbox-image');
-    
-    if (!modal || !image) return;
-    
-    image.style.transform = 'scale(0.95)';
-    image.style.opacity = '0';
-    
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.style.overflow = '';
-    }, 300);
-}
-
-function navigateLightbox(direction) {
-    currentLightboxIndex += direction;
-    
-    if (currentLightboxIndex < 0) {
-        currentLightboxIndex = galleryImages.length - 1;
-    } else if (currentLightboxIndex >= galleryImages.length) {
-        currentLightboxIndex = 0;
-    }
-    
     updateLightboxImage();
 }
 
 function updateLightboxImage() {
     const image = document.getElementById('lightbox-image');
     const counter = document.getElementById('lightbox-counter');
-    
-    if (!image) return;
-    
-    image.style.opacity = '0.5';
-    
-    setTimeout(() => {
+    if (image) {
         image.src = galleryImages[currentLightboxIndex];
-        counter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
-        image.style.opacity = '1';
-    }, 150);
-}
-
-/* ============================================
-   MODAL DE COLEÇÕES
-   ============================================ */
-function openModal(collectionId) {
-    const collection = collections.find(c => c.id === collectionId);
-    if (!collection) return;
-
-    const modalTitle = document.getElementById('modal-title');
-    const modalContent = document.getElementById('modal-content');
-    const modal = document.getElementById('collection-modal');
-
-    if (!modalTitle || !modalContent || !modal) return;
-
-    modalTitle.textContent = collection.name;
-    modalContent.innerHTML = collection.images.map(img => `
-        <div class="aspect-square rounded-xl overflow-hidden bg-nude">
-            <img src="${img}" alt="${collection.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-        </div>
-    `).join('');
-
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    const modal = document.getElementById('collection-modal');
-    if (!modal) return;
-    modal.classList.add('hidden');
-    document.body.style.overflow = '';
-}
-
-/* ============================================
-   EXPOSIÇÃO GLOBAL (PARA HTML onclick)
-   ============================================ */
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox;
-window.navigateLightbox = navigateLightbox;
-
-/* ============================================
-   EVENT LISTENERS GLOBAIS
-   ============================================ */
-// Fechar modais com ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const lightboxModal = document.getElementById('lightbox-modal');
-        const collectionModal = document.getElementById('collection-modal');
-        
-        if (lightboxModal && !lightboxModal.classList.contains('hidden')) {
-            closeLightbox();
-        } else if (collectionModal && !collectionModal.classList.contains('hidden')) {
-            closeModal();
-        }
+        if (counter) counter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
     }
-});
+}
 
-// Lightbox: clique no backdrop fecha
-document.addEventListener('click', (e) => {
+window.navigateLightbox = (dir) => {
+    currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+    updateLightboxImage();
+};
+
+window.closeLightbox = () => {
     const modal = document.getElementById('lightbox-modal');
-    if (modal && !modal.classList.contains('hidden') && e.target === modal.querySelector('[onclick]')) {
-        closeLightbox();
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
     }
-});
-
-// Lightbox: navegação por botões
-document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.getElementById('lightbox-prev');
-    const nextBtn = document.getElementById('lightbox-next');
-    
-    prevBtn?.addEventListener('click', () => navigateLightbox(-1));
-    nextBtn?.addEventListener('click', () => navigateLightbox(1));
-});
-
-// Swipe para mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('touchstart', (e) => {
-    const modal = document.getElementById('lightbox-modal');
-    if (!modal || modal.classList.contains('hidden')) return;
-    touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-document.addEventListener('touchend', (e) => {
-    const modal = document.getElementById('lightbox-modal');
-    if (!modal || modal.classList.contains('hidden')) return;
-    touchEndX = e.changedTouches[0].screenX;
-    
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-        diff > 0 ? navigateLightbox(1) : navigateLightbox(-1);
-    }
-}, { passive: true });
-
-/* ============================================
-   ANIMAÇÕES E UTILITÁRIOS
-   ============================================ */
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-/* ============================================
-   NAVBAR E MENU MOBILE
-   ============================================ */
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (!navbar) return;
-    if (window.pageYOffset > 50) {
-        navbar.classList.add('shadow-lg', 'shadow-charcoal/5');
-    } else {
-        navbar.classList.remove('shadow-lg', 'shadow-charcoal/5');
-    }
-}, { passive: true });
-
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-
-if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
-}
+};
 
 /* ============================================
    INICIALIZAÇÃO
    ============================================ */
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('✅ RW Joias - Iniciando...');
-    
-    renderCollections();
-    renderGallery();
-    
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    
-    document.querySelectorAll('.grid').forEach(grid => {
-        grid.querySelectorAll('.reveal').forEach((item, index) => {
-            item.style.transitionDelay = `${index * 100}ms`;
+    // Carrega dados do JSON primeiro
+    loadData();
+
+    // Setup do observer para animações
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
-    });
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-    
-    console.log('✅ RW Joias - Pronto!');
+    }, { threshold: 0.1 });
+
+    // Observer será aplicado após renderização
+    const setupObserver = () => {
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    };
+
+    // Re-setup observer quando conteúdo for renderizado
+    setTimeout(setupObserver, 100);
 });
+
+// Exporta funções para o window (necessário para onclick inline)
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
+window.navigateLightbox = window.navigateLightbox;
+window.scrollSlider = window.scrollSlider;
