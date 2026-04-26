@@ -296,17 +296,65 @@
     }
   ],
   "galleryImages": [
-    "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800",
-    "https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800",
-    "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
-    "https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800",
-    "https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800",
-    "https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800",
-    "https://images.unsplash.com/photo-1616837874254-8d5aaa63e273?q=80&w=800",
-    "https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?q=80&w=800",
-    "https://images.unsplash.com/photo-1643898191301-827756a7c855?q=80&w=800",
-    "https://images.unsplash.com/photo-1641284373694-f80eed6d29c7?q=80&w=800",
-    "https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800",
-    "https://images.unsplash.com/photo-1575863062476-51cd2be1af0f?q=80&w=800"
+    {
+      "src": "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800",
+      "titulo": "Pulseira Grumet 18k",
+      "descricao": "Elegância em cada detalhe"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800",
+      "titulo": "Colar Veneziana",
+      "descricao": "Sofisticação clássica"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
+      "titulo": "Aliança Classic",
+      "descricao": "Eterno compromisso"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1740567177735-b3a751eb3891?q=80&w=800",
+      "titulo": "Bracelete Modern",
+      "descricao": "Design contemporâneo"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1623040594055-9afc9b891b04?q=80&w=800",
+      "titulo": "Pingente Placa",
+      "descricao": "Personalização única"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1625516152414-8f33eef3d660?q=80&w=800",
+      "titulo": "Brinco Bolinha",
+      "descricao": "Minimalismo perfeito"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1616837874254-8d5aaa63e273?q=80&w=800",
+      "titulo": "Coleção Exclusiva",
+      "descricao": "Edição limitada"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?q=80&w=800",
+      "titulo": "Anel de Noivado",
+      "descricao": "Momento especial"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1643898191301-827756a7c855?q=80&w=800",
+      "titulo": "Gargantilha Luxo",
+      "descricao": "Alta joalheria"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1641284373694-f80eed6d29c7?q=80&w=800",
+      "titulo": "Conjunto Completo",
+      "descricao": "Harmonia perfeita"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1628785517892-dbcd2f2719ed?q=80&w=800",
+      "titulo": "Bracelete Rígido",
+      "descricao": "Força e delicadeza"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1575863062476-51cd2be1af0f?q=80&w=800",
+      "titulo": "Detalhes Preciosos",
+      "descricao": "Acabamento impecável"
+    }
   ]
 }

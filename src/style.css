@@ -12,19 +12,10 @@
 
   /* Paleta Premium - Tons Suaves */
   --color-cream: #FAF9F6;
-  /* Fundo principal */
   --color-nude: #F5F0EB;
-  /* Secundário */
   --color-champagne: #E8E0D5;
-  /* Destaque */
   --color-gold: #D4AF37;
-  /* Dourado premium */
-  --color-gold-light: #E5C56B;
-  /* Dourado claro */
   --color-charcoal: #2C2C2C;
-  /* Texto principal */
-  --color-charcoal-light: #5A5A5A;
-  /* Texto secundário */
 }
 
 /* ============================================
@@ -73,16 +64,24 @@
    ============================================ */
 @layer utilities {
 
-  /* Scroll Reveal */
+  /* Scroll Reveal - CORRIGIDO */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal.active {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Fallback: garante visibilidade se JS falhar */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   /* Float Animation */
@@ -119,9 +118,9 @@
     }
   }
 
-  /* Icon Hover Rotate */
+  /* Icon Hover Rotate - ANIMAÇÃO DOS ÍCONES */
   .group:hover i {
-    animation: iconRotate 0.6s ease;
+    animation: iconRotate 1s ease;
   }
 
   @keyframes iconRotate {
@@ -153,58 +152,82 @@
     }
   }
 
-  /* Badge Float */
-  .badge-float {
-    animation: badgeFloat 3s ease-in-out infinite;
+  /* Animações do modal */
+  .animate-modal-in {
+    animation: modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  @keyframes badgeFloat {
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(20px);
+    }
 
-    0%,
-    100% {
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-out {
+    animation: fade-out 0.3s ease forwards;
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    opacity: 0;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
       transform: translateY(0);
     }
+  }
 
-    50% {
-      transform: translateY(-5px);
+  .animate-image-load {
+    animation: image-load 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes image-load {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
     }
-  }
 
-  /* Shine Effect */
-  .shine-effect {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shine-effect::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.7s ease;
-  }
-
-  .shine-effect:hover::before {
-    left: 150%;
-  }
-
-  /* Text Balance */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Hide Scrollbar */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 
@@ -234,26 +257,14 @@
   transform: scale(1.05);
 }
 
-.collection-card .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(44, 44, 44, 0.7), transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.collection-card:hover .overlay {
-  opacity: 1;
-}
 
 /* Container do Slider */
 #collections-grid {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  padding: 20px;
 }
 
-/* Esconder barra de rolagem mas manter funcionalidade */
+/* Esconder barra de rolagem */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -263,51 +274,26 @@
   scrollbar-width: none;
 }
 
-/* Efeito de revelação suave no scroll */
-.collection-item {
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s;
-}
-
-/* Seta Suave (Indicador de "Mais") */
-.scroll-indicator {
-  position: absolute;
-  right: 5%;
-  bottom: 50%;
-  transform: translateY(50%);
-  animation: bounceRight 2s infinite;
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-@keyframes bounceRight {
-
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateX(0) translateY(50%);
-  }
-
-  40% {
-    transform: translateX(-10px) translateY(50%);
-  }
-
-  60% {
-    transform: translateX(-5px) translateY(50%);
-  }
-}
-
 /* ============================================
-   STYLE GALLERY
+   🖼️ GALERIA - RESPONSIVA COM OVERLAY HOVER
    ============================================ */
 
-/* Gallery Horizontal Item */
-.gallery-item-horizontal {
+/* Gallery Container */
+.gallery-scroll-container {
+  max-height: 70vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gallery Slide - Tamanhos responsivos */
+.gallery-slide {
   flex: 0 0 auto;
-  width: 300px;
-  height: 400px;
-  scroll-snap-align: start;
+  width: 280px;
+  height: 420px;
   border-radius: 1.5rem;
   overflow: hidden;
   position: relative;
@@ -315,26 +301,84 @@
   transition: transform 0.4s ease;
 }
 
-.gallery-item-horizontal:hover {
+@media (min-width: 640px) {
+  .gallery-slide {
+    width: 320px;
+    height: 480px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-slide {
+    width: 360px;
+    height: 540px;
+  }
+}
+
+.gallery-slide:hover {
   transform: scale(1.02);
 }
 
-.gallery-item-horizontal img {
+.gallery-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.gallery-item-horizontal:hover img {
+.gallery-slide:hover img {
   transform: scale(1.08);
+}
+
+/* Overlay da Galeria - HOVER COM TEXTO */
+.gallery-slide .gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(44, 44, 44, 0.9), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+
+.gallery-slide:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay h3 {
+  color: white;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 500;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.gallery-slide:hover .gallery-overlay h3 {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gallery-overlay p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.4s ease 0.2s;
+}
+
+.gallery-slide:hover .gallery-overlay p {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* ============================================
    LIGHTBOX MODAL
    ============================================ */
 
-/* Lightbox Modal */
 #lightbox-modal {
   opacity: 0;
   visibility: hidden;
@@ -347,13 +391,14 @@
 }
 
 #lightbox-image {
-  transform: scale(0.9);
-  opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  max-height: 70vh;
+  object-fit: contain;
+  animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-#lightbox-image[src] {
-  animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Classe auxiliar para reiniciar a animação sem bug */
+.animate-lightbox-reset {
+  animation: none !important;
 }
 
 @keyframes fadeInScale {
@@ -380,7 +425,6 @@
    COLLECTION MODAL
    ============================================ */
 
-/* Collection Modal */
 #collection-modal {
   opacity: 0;
   visibility: hidden;
@@ -401,60 +445,29 @@
   transform: scale(1.02);
 }
 
-
-
-/* Testimonial Card Shine */
-.testimonial-card {
-  position: relative;
+/* Modal Slider */
+#modal-slider {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-.testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.7s ease;
-  pointer-events: none;
+#modal-slider>div {
+  scroll-snap-align: center;
 }
 
-.testimonial-card:hover::before {
-  left: 100%;
+/* Modal Dots */
+.modal-dot {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 
 /* ============================================
-   🎯 UTILITÁRIOS PERSONALIZADOS
-   ============================================ */
-.glass {
-  background: rgba(250, 249, 246, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.glass-dark {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.hover-lift {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* ============================================
-   📱 RESPONSIVIDADE EXTRA (se necessário)
+   📱 RESPONSIVIDADE
    ============================================ */
 @media (max-width: 768px) {
-  .gallery-item-horizontal {
+  .gallery-slide {
     width: 260px;
-    height: 340px;
+    height: 390px;
   }
 
   .collection-card:hover {
@@ -462,11 +475,9 @@
   }
 }
 
-
 /* ============================================
    FOOTER
    ============================================ */
-/* Footer hover effects */
 footer a {
   position: relative;
 }
@@ -487,7 +498,6 @@ footer a:hover::after {
   left: 0;
 }
 
-/* Payment Icons - Hover Glow */
 footer [title]:hover {
   transform: translateY(-2px);
   transition: transform 0.2s ease;
