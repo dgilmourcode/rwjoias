@@ -658,20 +658,30 @@ window.scrollGallery = (direction) => {
     const slides = track?.querySelectorAll('.gallery-slide');
     if (!track || !slides.length) return;
 
-    const slideWidth = slides[0].offsetWidth + 16;
-    const containerWidth = track.parentElement.offsetWidth;
-    const visibleSlides = Math.ceil(containerWidth / slideWidth) - 2;
+    // Aguarda o próximo frame para garantir que os elementos estão renderizados
+    requestAnimationFrame(() => {
+        const slide = slides[0];
+        const slideWidth = slide.offsetWidth + 16; // 16px é o gap
 
-    const scrollAmount = visibleSlides * direction;
-    const maxIndex = slides.length - visibleSlides;
+        if (slideWidth <= 16) {
+            console.warn('Slide width é 0 ou inválido');
+            return;
+        }
 
-    currentGallerySlide = Math.max(0, Math.min(
-        currentGallerySlide + scrollAmount,
-        maxIndex
-    ));
+        const containerWidth = track.parentElement.offsetWidth;
+        const visibleSlides = Math.max(1, Math.ceil(containerWidth / slideWidth) - 1);
 
-    track.style.transform = `translateX(-${currentGallerySlide * slideWidth}px)`;
-    updateGalleryIndicators();
+        const scrollAmount = visibleSlides * direction;
+        const maxIndex = Math.max(0, slides.length - visibleSlides);
+
+        currentGallerySlide = Math.max(0, Math.min(
+            currentGallerySlide + scrollAmount,
+            maxIndex
+        ));
+
+        track.style.transform = `translateX(-${currentGallerySlide * slideWidth}px)`;
+        updateGalleryIndicators();
+    });
 };
 
 window.goToSlide = (index) => {
@@ -679,10 +689,12 @@ window.goToSlide = (index) => {
     const slide = track?.querySelector('.gallery-slide');
     if (!track || !slide) return;
 
-    currentGallerySlide = index;
-    const slideWidth = slide.offsetWidth + 16;
-    track.style.transform = `translateX(-${currentGallerySlide * slideWidth}px)`;
-    updateGalleryIndicators();
+    requestAnimationFrame(() => {
+        currentGallerySlide = index;
+        const slideWidth = slide.offsetWidth + 16;
+        track.style.transform = `translateX(-${currentGallerySlide * slideWidth}px)`;
+        updateGalleryIndicators();
+    });
 };
 
 function updateGalleryIndicators() {
