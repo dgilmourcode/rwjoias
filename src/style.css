@@ -1,11 +1,11 @@
 /* ============================================
-   🧵 TAILWIND CSS v4 + DESIGN SYSTEM PREMIUM
+   TAILWIND CSS v4 + DESIGN SYSTEM PREMIUM
    ============================================ */
 @import "tailwindcss";
 
 
 /* ============================================
-   🎨 DESIGN SYSTEM (TOKENS / THEME)
+   DESIGN SYSTEM (TOKENS / THEME)
    ============================================ */
 @theme inline {
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -21,7 +21,7 @@
 
 
 /* ============================================
-   🧱 BASE / RESET GLOBAL
+   BASE / RESET GLOBAL
    ============================================ */
 @layer base {
   html {
@@ -63,7 +63,7 @@
 
 
 /* ============================================
-   ✨ UTILITIES & ANIMAÇÕES GLOBAIS
+   UTILITIES & ANIMACOES GLOBAIS
    ============================================ */
 @layer utilities {
 
@@ -91,7 +91,7 @@
 
 
   /* =========================
-     ENTRADA SUAVE DE SEÇÕES
+     ENTRADA SUAVE DE SECOES
      ========================= */
   .animate-fade-in-up {
     animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -303,7 +303,7 @@
 
 
 /* ============================================
-   🧩 COMPONENTES - COLLECTION
+   COMPONENTES - COLLECTION
    ============================================ */
 .collection-card {
   position: relative;
@@ -328,7 +328,7 @@
 
 
 /* ============================================
-   🖼️ GALLERY / SLIDER
+   GALLERY / SLIDER
    ============================================ */
 .gallery-slide {
   flex: 0 0 auto;
@@ -375,7 +375,7 @@
 
 
 /* ============================================
-   🔍 LIGHTBOX
+   LIGHTBOX
    ============================================ */
 #lightbox-modal {
   opacity: 0;
@@ -408,7 +408,7 @@
 
 
 /* ============================================
-   📦 COLLECTION MODAL
+   COLLECTION MODAL
    ============================================ */
 #collection-modal {
   opacity: 0;
@@ -423,7 +423,76 @@
 
 
 /* ============================================
-   📱 RESPONSIVO
+   CHECKOUT MODAL - ESTILOS MODERNOS
+   ============================================ */
+#checkout-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+#checkout-modal:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Custom select styling */
+#parcelamento {
+  background-image: none;
+}
+
+/* Radio custom visual */
+.radio-check {
+  transition: opacity 0.2s ease;
+}
+
+/* Input focus states */
+#checkout-modal input:focus,
+#checkout-modal textarea:focus,
+#checkout-modal select:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+/* Promo code input uppercase */
+#promo-code {
+  text-transform: uppercase;
+}
+
+#promo-code::placeholder {
+  text-transform: none;
+}
+
+/* Hide scrollbar for modal slider */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transitions for payment cards */
+#checkout-modal label:has(input[type="radio"]) {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#checkout-modal label:has(input[type="radio"]:checked) {
+  border-color: var(--color-gold);
+  background-color: rgba(212, 175, 55, 0.05);
+}
+
+/* Price strikethrough animation */
+.line-through {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 2px;
+}
+
+
+/* ============================================
+   RESPONSIVO
    ============================================ */
 @media (max-width: 768px) {
   .gallery-slide {
@@ -434,11 +503,27 @@
   .collection-card:hover {
     transform: translateY(-4px);
   }
+
+  /* Checkout modal mobile adjustments */
+  #checkout-modal>div:last-child {
+    align-items: flex-end;
+  }
+
+  #checkout-modal .animate-modal-in {
+    border-radius: 1.5rem 1.5rem 0 0;
+    max-height: 90vh;
+  }
+}
+
+@media (min-width: 769px) {
+  #checkout-modal>div:last-child {
+    align-items: center;
+  }
 }
 
 
 /* ============================================
-   🦶 FOOTER EFFECTS
+   FOOTER EFFECTS
    ============================================ */
 footer a {
   position: relative;

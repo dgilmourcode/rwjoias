@@ -297,14 +297,59 @@
   ],
   "galleryImages": [
     {
-      "src": "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800",
-      "titulo": "Pulseira Grumet 18k",
-      "descricao": "Elegância em cada detalhe"
+      "src": "https://images.unsplash.com/photo-1565619601015-e57cced38f39?q=80&w=800",
+      "titulo": "Anel Dourado RW",
+      "descricao": "Puro RW Joias"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1679973298026-669cded1a580?q=80&w=800",
+      "titulo": "Collar Modern Prata",
+      "descricao": "Prata Lobisomem"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1534875611686-50fe95ae2624?q=80&w=800",
+      "titulo": "Alliance RW",
+      "descricao": "Lux RW Joias"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1769555940899-1c9395c012c8?q=80&w=800",
+      "titulo": "Pigent Ouro Men",
+      "descricao": "Momento Casual"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1602580404246-225af00637ac?q=80&w=800",
+      "titulo": "Argola Poderosa",
+      "descricao": "Mulheres do Futuro"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1587947330318-88fcd9055420?q=80&w=800",
+      "titulo": "Aliança Prata Family",
+      "descricao": "Exclusive RW"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1762505464759-7c70f271c5e6?q=80&w=800",
+      "titulo": "Collar Ouro Black",
+      "descricao": "Brilho da RW"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1679973299383-7a60160b03a2?q=80&w=800",
+      "titulo": "Prata Lobisomem",
+      "descricao": "Visual Homem Moderno"
     },
     {
       "src": "https://images.unsplash.com/photo-1633810542706-90e5ff7557be?q=80&w=800",
       "titulo": "Colar Veneziana",
       "descricao": "Sofisticação clássica"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1681091670656-1bf1f7652fc3?q=80&w=800",
+      "titulo": "Kit Prata Men",
+      "descricao": "Lux Daily"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?q=80&w=800",
+      "titulo": "Pulseira Grumet 18k",
+      "descricao": "Elegância em cada detalhe"
     },
     {
       "src": "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
@@ -355,6 +400,21 @@
       "src": "https://images.unsplash.com/photo-1575863062476-51cd2be1af0f?q=80&w=800",
       "titulo": "Detalhes Preciosos",
       "descricao": "Acabamento impecável"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1680068095653-8af79198635d?q=80&w=800",
+      "titulo": "Collection Vip",
+      "descricao": "Prata Lux"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1619346270223-c137f4052523?q=80&w=800",
+      "titulo": "Design Exclusivo",
+      "descricao": "Clock Black"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1611727513202-9e7af00464ea?q=80&w=800",
+      "titulo": "Visual Deslumbrante",
+      "descricao": "Prata Time"
     }
   ]
 }
