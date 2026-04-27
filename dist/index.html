@@ -20,8 +20,8 @@
 
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script type="module" crossorigin src="/rwjoias/assets/index-CsiclBwq.js"></script>
-  <link rel="stylesheet" crossorigin href="/rwjoias/assets/index-Bids5qsx.css">
+  <script type="module" crossorigin src="/rwjoias/assets/index-CM1qvjFO.js"></script>
+  <link rel="stylesheet" crossorigin href="/rwjoias/assets/index-CNozEYb7.css">
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden bg-cream text-charcoal">
@@ -87,51 +87,242 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- =========================================
+   HERO SECTION - LUXURY MINIMAL / APPLE DRIBBBLE STYLE
+  ========================================= -->
   <section id="sobre"
-    class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-b from-cream via-nude/50 to-cream">
-    <!-- Decorative Elements -->
-    <div class="absolute top-32 left-10 w-96 h-96 bg-champagne/30 rounded-full blur-3xl animate-float"></div>
-    <div class="absolute bottom-20 right-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl animate-float"
-      style="animation-delay: 2s;"></div>
+    class="relative min-h-[115vh] flex items-center justify-center pt-24 pb-20 overflow-hidden bg-cream">
 
-    <!-- Content -->
-    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-      <div class="animate-fade-in-up">
-        <p class="text-gold text-xs uppercase tracking-[0.5em] mb-8 font-medium">Excelência em Ouro e Prata</p>
-        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-charcoal mb-8 leading-tight">
-          Joias que<br>
-          <span class="italic text-gold">eternizam</span><br>
-          momentos
-        </h1>
-        <p class="text-base md:text-lg text-charcoal/50 max-w-xl mx-auto mb-12 leading-relaxed font-light">
-          Produzindo excelência e exclusividade em cada peça.<br>
-          Criamos joias únicas que contam sua história.
+    <!-- =========================================
+     BACKGROUND LAYER (IMAGE + GRADIENT CLEAN)
+    ========================================== -->
+    <div class="absolute inset-0 z-0">
+
+      <!-- Image Side (Direita) -->
+      <div class="absolute inset-0 lg:left-1/2 w-full lg:w-1/2 h-full opacity-40 lg:opacity-100">
+        <img src="https://images.unsplash.com/photo-1627293509201-cd0c780043e6?q=80&w=1600" alt="Corrente Cartier"
+          class="w-full h-full object-cover object-center grayscale-[20%] scale-x-[-1]">
+
+        <!-- Gradient fade REAL (sem criar bloco visual) -->
+        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-cream/10 lg:via-cream/40 to-cream/70"></div>
+      </div>
+
+      <!-- Left clean overlay (garante leitura SEM criar “caixa”) -->
+      <div class="absolute inset-0 bg-cream/12 lg:bg-gradient-to-r lg:from-cream lg:via-cream lg:to-transparent"></div>
+
+    </div>
+
+    <!-- =========================================
+     DECORATIVE GLOW (SUBTLE LUXURY AMBIENT)
+    ========================================== -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] 
+                bg-gold/5 blur-[140px] rounded-full animate-float"></div>
+
+    <!-- =========================================
+     MAIN CONTENT
+    ========================================== -->
+    <div class="relative z-20 w-full max-w-6xl mx-auto px-6 text-center">
+
+      <!-- HEADER TEXT -->
+      <div class="space-y-6 animate-fade-in-up">
+
+        <p class="text-gold text-[10px] lg:text-xs uppercase tracking-[0.5em] font-semibold">
+          Excelência em Ouro e Prata
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="#colecoes"
-            class="group px-8 py-4 bg-charcoal text-cream font-medium rounded-full hover:bg-gold transition-all duration-500 flex items-center gap-3">
-            <span>Explorar Coleções</span>
-            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
+        <h1 class="font-serif text-5xl md:text-6xl lg:text-8xl font-light text-charcoal leading-[1.1]">
+          Joias que <span class="italic text-gold">eternizam</span><br>
+          momentos
+        </h1>
+
+        <p class="text-base lg:text-xl text-charcoal/60 font-light max-w-2xl mx-auto">
+          Produzindo excelência e exclusividade em cada peça. <br>Criamos joias únicas que contam sua história.
+        </p>
+      </div>
+
+      <!-- =========================================
+       CTA BUTTONS
+      ========================================== -->
+      <div class="flex flex-col sm:flex-row gap-5 justify-center items-center pt-8">
+
+        <a href="#colecoes" class="group relative px-10 py-4 bg-charcoal text-white rounded-full overflow-hidden
+                 shadow-xl hover:-translate-y-1 transition-all duration-500">
+
+          <span class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/30 to-gold/0 
+                       opacity-0 group-hover:opacity-100 transition"></span>
+
+          <span class="relative flex items-center gap-3">
+            Explorar Coleções
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" stroke="currentColor"
               viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
-          <a href="#contato"
-            class="px-8 py-4 border border-charcoal/20 text-charcoal font-medium rounded-full hover:border-gold hover:text-gold transition-all duration-300">
+          </span>
+        </a>
+
+        <a href="#contato" class="group px-10 py-4 rounded-full border border-gold/30 text-charcoal backdrop-blur-md
+                         hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
+
+          <span class="flex items-center gap-2">
+            <i class="fas fa-paper-plane text-gold group-hover:translate-x-1 transition-transform duration-300"></i>
             Solicitar Orçamento
-          </a>
+          </span>
+        </a>
+
+      </div>
+
+      <!-- CAROUSEL -->
+      <div class="relative pt-14 pb-16 overflow-hidden
+            [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]
+            [-webkit-mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      
+        <div class="flex gap-16 w-max animate-marquee items-center hover:[animation-play-state:paused]">
+      
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                  shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+      
+              <i class="fas fa-link text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Pulseira
+            </span>
+          </div>
+      
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                  shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+      
+              <i class="fas fa-gem text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Colar
+            </span>
+          </div>
+      
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                  shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+      
+              <i class="fa-solid fa-anchor text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Pingente
+            </span>
+          </div>
+      
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                  shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+      
+              <i class="fas fa-ring text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Aliança
+            </span>
+          </div>
+      
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                  shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+      
+              <i class="fas fa-clock text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Relógios
+            </span>
+          </div>
+
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div
+              class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                            shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+          
+              <i class="fas fa-link text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Pulseira
+            </span>
+          </div>
+          
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div
+              class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                            shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+          
+              <i class="fas fa-gem text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Colar
+            </span>
+          </div>
+          
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div
+              class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                            shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+          
+              <i class="fa-solid fa-anchor text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Pingente
+            </span>
+          </div>
+          
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div
+              class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                            shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+          
+              <i class="fas fa-ring text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Aliança
+            </span>
+          </div>
+          
+          <!-- ITEM -->
+          <div class="flex flex-col items-center min-w-[140px] group">
+            <div
+              class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-charcoal flex items-center justify-center
+                            shadow-xl shadow-black/30 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+          
+              <i class="fas fa-clock text-gold text-3xl"></i>
+            </div>
+            <span class="mt-3 text-xs uppercase tracking-[0.3em] text-charcoal/50 group-hover:text-charcoal">
+              Relógios
+            </span>
+          </div>
+      
         </div>
       </div>
 
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div class="w-6 h-10 border-2 border-charcoal/20 rounded-full flex items-start justify-center p-2">
-          <div class="w-1 h-2 bg-gold rounded-full"></div>
-        </div>
-      </div>
     </div>
+
+    <!-- =========================================
+     SCROLL INDICATOR (CLEAN FIXED POSITION)
+    ========================================== -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+
+      <div class="w-6 h-10 rounded-full border border-charcoal/20 flex items-start justify-center p-1">
+        <div class="w-1 h-2 bg-gold rounded-full animate-[scrollDot_1.5s_infinite]"></div>
+      </div>
+
+      <span class="text-[9px] tracking-[0.4em] text-charcoal/40 uppercase">
+        Scroll
+      </span>
+
+    </div>
+
   </section>
 
   <!-- About Section -->
@@ -256,61 +447,59 @@
         <!-- O modal da coleção é redenrizado aqui pelo js -->
       </div>
     </div>
-  </section> 
+  </section>
 
   <!-- Gallery Section -->
-<section id="galeria" class="py-24 bg-white overflow-hidden">
+  <section id="galeria" class="py-24 bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
-        <div class="text-center reveal">
-            <p class="text-gold text-xs uppercase tracking-[0.4em] mb-4 font-medium">Galeria</p>
-            <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal mb-6">
-                Momentos de <span class="italic text-gold">Brilho</span>
-            </h2>
-        </div>
+      <div class="text-center reveal">
+        <p class="text-gold text-xs uppercase tracking-[0.4em] mb-4 font-medium">Galeria</p>
+        <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal mb-6">
+          Momentos de <span class="italic text-gold">Brilho</span>
+        </h2>
+      </div>
     </div>
 
     <!-- Container com botões SEMPRE visíveis -->
     <div class="relative max-w-6xl mx-auto px-12 md:px-16 lg:px-20">
-        
-        <!-- Botão Anterior -->
-        <button onclick="scrollGallery(-1)" 
-                class="absolute left-4 top-1/2 -translate-y-1/2 z-30 
+
+      <!-- Botão Anterior -->
+      <button onclick="scrollGallery(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 
                        w-12 h-12 bg-white shadow-xl rounded-full 
                        flex items-center justify-center 
                        text-charcoal hover:bg-gold/40 hover:text-white 
                        transition-all duration-300 hover:scale-110
                        border border-champagne">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M15 18l-6-6 6-6"/>
-            </svg>
-        </button>
-        
-        <!-- Track da Galeria -->
-        <div class="gallery-scroll-container overflow-hidden rounded-2xl md:rounded-3xl">
-            <div id="gallery-track" class="flex gap-4 transition-transform duration-500 ease-out">
-                <!-- Images generated by JS -->
-            </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <!-- Track da Galeria -->
+      <div class="gallery-scroll-container overflow-hidden rounded-2xl md:rounded-3xl">
+        <div id="gallery-track" class="flex gap-4 transition-transform duration-500 ease-out">
+          <!-- Images generated by JS -->
         </div>
-        
-        <!-- Botão Próximo -->
-        <button onclick="scrollGallery(1)" 
-                class="absolute right-4 top-1/2 -translate-y-1/2 z-30 
+      </div>
+
+      <!-- Botão Próximo -->
+      <button onclick="scrollGallery(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 
                        w-12 h-12 bg-white shadow-xl rounded-full 
                        flex items-center justify-center 
                        text-charcoal hover:bg-gold/40 hover:text-white 
                        transition-all duration-300 hover:scale-110
                        border border-champagne">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M9 18l6-6-6-6"/>
-            </svg>
-        </button>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
     </div>
 
     <!-- Indicadores -->
     <div class="flex justify-center gap-2 mt-8" id="gallery-indicators">
-        <!-- Generated by JS -->
+      <!-- Generated by JS -->
     </div>
-</section>
+  </section>
 
   <!-- Como trabalhamos -->
   <section id="processo" class="py-24 bg-charcoal relative overflow-hidden">
@@ -608,7 +797,7 @@
                 <p class="text-charcoal font-medium group-hover:text-gold transition-colors">rwjoiasthe@gmail.com</p>
               </div>
             </a>
-          
+
             <a href="https://wa.me/5586994888666" target="_blank" class="flex items-center gap-4 group">
               <div
                 class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
@@ -619,7 +808,7 @@
                 <p class="text-charcoal font-medium group-hover:text-green-600 transition-colors">(86) 99488-8666</p>
               </div>
             </a>
-          
+
             <div class="flex items-start gap-4 group">
               <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center flex-shrink-0">
                 <i class="fas fa-location-dot text-gold text-xl"></i>

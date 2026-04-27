@@ -1,16 +1,17 @@
 /* ============================================
-   TAILWIND CSS v4 + CUSTOM STYLES
+   🧵 TAILWIND CSS v4 + DESIGN SYSTEM PREMIUM
    ============================================ */
 @import "tailwindcss";
 
+
 /* ============================================
-   🎨 THEME - CORES PREMIUM
+   🎨 DESIGN SYSTEM (TOKENS / THEME)
    ============================================ */
 @theme inline {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
 
-  /* Paleta Premium - Tons Suaves */
+  /* Paleta luxo minimalista */
   --color-cream: #FAF9F6;
   --color-nude: #F5F0EB;
   --color-champagne: #E8E0D5;
@@ -18,8 +19,9 @@
   --color-charcoal: #2C2C2C;
 }
 
+
 /* ============================================
-   🧱 BASE & RESET
+   🧱 BASE / RESET GLOBAL
    ============================================ */
 @layer base {
   html {
@@ -36,10 +38,10 @@
 
   ::selection {
     background: var(--color-gold);
-    color: white;
+    color: #fff;
   }
 
-  /* Scrollbar personalizada */
+  /* Scrollbar premium */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -59,16 +61,20 @@
   }
 }
 
+
 /* ============================================
-   ✨ ANIMAÇÕES GLOBAIS
+   ✨ UTILITIES & ANIMAÇÕES GLOBAIS
    ============================================ */
 @layer utilities {
 
-  /* Scroll Reveal - CORRIGIDO */
+  /* =========================
+     SCROLL REVEAL (JS CONTROLADO)
+     ========================= */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal.active {
@@ -76,7 +82,6 @@
     transform: translateY(0);
   }
 
-  /* Fallback: garante visibilidade se JS falhar */
   @media (prefers-reduced-motion: reduce) {
     .reveal {
       opacity: 1;
@@ -84,24 +89,10 @@
     }
   }
 
-  /* Float Animation */
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
 
-  @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-
-  /* Fade In Up */
+  /* =========================
+     ENTRADA SUAVE DE SEÇÕES
+     ========================= */
   .animate-fade-in-up {
     animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -118,16 +109,39 @@
     }
   }
 
-  /* Icon Hover Rotate - ANIMAÇÃO DOS ÍCONES */
+
+  /* =========================
+     FLOAT (DECORATIVO)
+     ========================= */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+
+  /* =========================
+     ICON HOVER PREMIUM
+     ========================= */
   .group:hover i {
-    animation: iconRotate 1s ease;
+    animation: iconRotate 0.8s ease;
   }
 
   @keyframes iconRotate {
 
     0%,
     100% {
-      transform: rotate(0deg) scale(1);
+      transform: rotate(0) scale(1);
     }
 
     50% {
@@ -135,7 +149,10 @@
     }
   }
 
-  /* Star Pulse */
+
+  /* =========================
+     STAR EFFECT (SE USAR EM REVIEWS)
+     ========================= */
   .group:hover .fa-star {
     animation: starPulse 0.6s ease;
   }
@@ -152,7 +169,10 @@
     }
   }
 
-  /* Animações do modal */
+
+  /* =========================
+     MODAL ANIMATIONS
+     ========================= */
   .animate-modal-in {
     animation: modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -169,6 +189,7 @@
     }
   }
 
+
   .animate-fade-in {
     animation: fade-in 0.3s ease forwards;
   }
@@ -183,6 +204,7 @@
     }
   }
 
+
   .animate-fade-out {
     animation: fade-out 0.3s ease forwards;
   }
@@ -196,6 +218,7 @@
       opacity: 0;
     }
   }
+
 
   .animate-slide-up {
     animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
@@ -214,6 +237,10 @@
     }
   }
 
+
+  /* =========================
+     IMAGE LOAD (LAZY FEEL)
+     ========================= */
   .animate-image-load {
     animation: image-load 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -229,19 +256,61 @@
       transform: scale(1);
     }
   }
+
+
+  /* =========================
+     SCROLL DOT HERO
+     ========================= */
+  @keyframes scrollDot {
+    0% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+
+    50% {
+      transform: translateY(6px);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+  }
+
+
+  /* =========================
+     MARQUEE LUXURY LOOP
+     ========================= */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 18s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
 }
 
-/* ============================================
-   🧩 COMPONENTES COLLECTION
-   ============================================ */
 
-/* Collection Card */
+/* ============================================
+   🧩 COMPONENTES - COLLECTION
+   ============================================ */
 .collection-card {
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem;
   cursor: pointer;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .collection-card:hover {
@@ -250,7 +319,7 @@
 }
 
 .collection-card img {
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s ease;
 }
 
 .collection-card:hover img {
@@ -258,38 +327,9 @@
 }
 
 
-/* Container do Slider */
-#collections-grid {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Esconder barra de rolagem */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 /* ============================================
-   🖼️ GALERIA - RESPONSIVA COM OVERLAY HOVER
+   🖼️ GALLERY / SLIDER
    ============================================ */
-
-/* Gallery Container */
-.gallery-scroll-container {
-  max-height: 70vh;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.gallery-scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Gallery Slide - Tamanhos responsivos */
 .gallery-slide {
   flex: 0 0 auto;
   width: 280px;
@@ -297,22 +337,7 @@
   border-radius: 1.5rem;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   transition: transform 0.4s ease;
-}
-
-@media (min-width: 640px) {
-  .gallery-slide {
-    width: 320px;
-    height: 480px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .gallery-slide {
-    width: 360px;
-    height: 540px;
-  }
 }
 
 .gallery-slide:hover {
@@ -323,15 +348,16 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s ease;
 }
 
 .gallery-slide:hover img {
   transform: scale(1.08);
 }
 
-/* Overlay da Galeria - HOVER COM TEXTO */
-.gallery-slide .gallery-overlay {
+
+/* Overlay da galeria */
+.gallery-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(44, 44, 44, 0.9), transparent);
@@ -347,42 +373,14 @@
   opacity: 1;
 }
 
-.gallery-overlay h3 {
-  color: white;
-  font-family: var(--font-serif);
-  font-size: 1.125rem;
-  font-weight: 500;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.4s ease 0.1s;
-}
-
-.gallery-slide:hover .gallery-overlay h3 {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.gallery-overlay p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.875rem;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.4s ease 0.2s;
-}
-
-.gallery-slide:hover .gallery-overlay p {
-  transform: translateY(0);
-  opacity: 1;
-}
 
 /* ============================================
-   LIGHTBOX MODAL
+   🔍 LIGHTBOX
    ============================================ */
-
 #lightbox-modal {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: 0.3s ease;
 }
 
 #lightbox-modal:not(.hidden) {
@@ -393,12 +391,7 @@
 #lightbox-image {
   max-height: 70vh;
   object-fit: contain;
-  animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Classe auxiliar para reiniciar a animação sem bug */
-.animate-lightbox-reset {
-  animation: none !important;
+  animation: fadeInScale 0.4s ease forwards;
 }
 
 @keyframes fadeInScale {
@@ -413,22 +406,14 @@
   }
 }
 
-#lightbox-modal button {
-  transition: transform 0.2s ease;
-}
-
-#lightbox-modal button:hover {
-  transform: scale(1.1);
-}
 
 /* ============================================
-   COLLECTION MODAL
+   📦 COLLECTION MODAL
    ============================================ */
-
 #collection-modal {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition: 0.4s ease;
 }
 
 #collection-modal:not(.hidden) {
@@ -436,33 +421,9 @@
   visibility: visible;
 }
 
-#collection-modal img {
-  border-radius: 1rem;
-  transition: transform 0.3s ease;
-}
-
-#collection-modal img:hover {
-  transform: scale(1.02);
-}
-
-/* Modal Slider */
-#modal-slider {
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-
-#modal-slider>div {
-  scroll-snap-align: center;
-}
-
-/* Modal Dots */
-.modal-dot {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 
 /* ============================================
-   📱 RESPONSIVIDADE
+   📱 RESPONSIVO
    ============================================ */
 @media (max-width: 768px) {
   .gallery-slide {
@@ -475,30 +436,26 @@
   }
 }
 
+
 /* ============================================
-   FOOTER
+   🦶 FOOTER EFFECTS
    ============================================ */
 footer a {
   position: relative;
 }
 
 footer a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 50%;
   width: 0;
   height: 1px;
   background: var(--color-gold);
-  transition: width 0.3s ease, left 0.3s ease;
+  transition: 0.3s ease;
 }
 
 footer a:hover::after {
   width: 100%;
   left: 0;
-}
-
-footer [title]:hover {
-  transform: translateY(-2px);
-  transition: transform 0.2s ease;
 }

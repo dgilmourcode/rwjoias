@@ -1,510 +1,368 @@
-# 📘 GUIA COMPLETO - RW JOIAS LANDING PAGE
+<div align="center">
 
-Bem-vindo ao guia oficial do projeto **RW Joias**. Este documento foi cuidadosamente reestruturado para ser um material de estudo didático, ideal para quem está aprendendo desenvolvimento web moderno com Vite e Tailwind CSS e busca uma vaga como Desenvolvedor Júnior.
+  <!-- CAPA / BANNER -->
+  <img src="public/rwjoias-capa.png" alt="RW JOIAS - O Rei das Joias" width="180" style="margin-bottom: 20px;" />
 
----
+  <h1>✨ RW JOIAS — O Rei das Joias</h1>
 
-## 📑 SUMÁRIO
+  <p>
+    <strong>Landing Page Premium</strong> para joalheria fictícia, desenvolvida com foco em <br/>
+    elegância, performance e experiência do usuário.
+  </p>
 
-1. [Visão Geral do Projeto](#1-visão-geral-do-projeto)
-2. [Pré-requisitos e Instalação](#2-pré-requisitos-e-instalação)
-   - [2.1. Verificar Node.js](#21-verificar-nodejs)
-   - [2.2. Instalar Dependências](#22-instalar-dependências)
-   - [2.3. Rodar o Servidor de Desenvolvimento](#23-rodar-o-servidor-de-desenvolvimento)
-3. [Estrutura do Projeto](#3-estrutura-do-projeto)
-4. [Configuração do Vite](#4-configuração-do-vite)
-5. [Configuração do Tailwind CSS e PostCSS](#5-configuração-do-tailwind-css-e-postcss)
-   - [5.1. O Arquivo `postcss.config.js`](#51-o-arquivo-postcssconfigjs)
-   - [5.2. O Arquivo `tailwind.config.js`](#52-o-arquivo-tailwindconfigjs)
-   - [5.3. O CSS Organizado (`src/style.css`)](#53-o-css-organizado-srcstylecss)
-6. [Guia de Cores e Design](#6-guia-de-cores-e-design)
-   - [6.1. Paleta de Cores](#61-paleta-de-cores)
-   - [6.2. Tipografia e Fontes](#62-tipografia-e-fontes)
-   - [6.3. Hierarquia Tipográfica](#63-hierarquia-tipográfica)
-   - [6.4. Boas Práticas de Acessibilidade](#64-boas-práticas-de-acessibilidade)
-7. [Anatomia do Código (HTML, CSS e JS)](#7-anatomia-do-código-html-css-e-js)
-   - [7.1. O HTML Limpo (`index.html`)](#71-o-html-limpo-indexhtml)
-   - [7.2. O JavaScript Modular (`src/main.js`)](#72-o-javascript-modular-srcmainjs)
-   - [7.3. Funções de Interatividade](#73-funções-de-interatividade)
-8. [Como Editar e Personalizar](#8-como-editar-e-personalizar)
-   - [8.1. Trocar Imagens](#81-trocar-imagens)
-   - [8.2. Editar Textos](#82-editar-textos)
-   - [8.3. Adicionar Nova Coleção](#83-adicionar-nova-coleção)
-   - [8.4. Mudar Cores para Outros Negócios](#84-mudar-cores-para-outros-negócios)
-9. [GitHub e Versionamento](#9-github-e-versionamento)
-   - [9.1. Fluxo Básico do Git](#91-fluxo-básico-do-git)
-   - [9.2. Convenção de Commits](#92-convenção-de-commits)
-10. [Deploy - Colocando Online](#10-deploy---colocando-online)
-    - [10.1. GitHub Pages](#101-github-pages)
-    - [10.2. Netlify (Gratuito)](#102-netlify-gratuito)
-    - [10.3. Vercel (Gratuito)](#103-vercel-gratuito)
-11. [🛠️ Onde Errei e o Que Foi Melhorado (Análise de Erros)](#11-️-onde-errei-e-o-que-foi-melhorado-análise-de-erros)
-    - [11.1. Erro de CSS (PostCSS)](#111-erro-de-css-postcss)
-    - [11.2. Importação do CSS no HTML](#112-importação-do-css-no-html)
-    - [11.3. Funções de Modal não Acessíveis (Scope Issue)](#113-funções-de-modal-não-acessíveis-scope-issue)
-    - [11.4. Configuração Incompleta do Tailwind v4](#114-configuração-incompleta-do-tailwind-v4)
-    - [11.5. Ordem dos Imports no CSS](#115-ordem-dos-imports-no-css)
-    - [11.6. Melhorias Visuais Adicionais](#116-melhorias-visuais-adicionais)
-12. [Próximos Passos e Ideias para Evoluir](#12-próximos-passos-e-ideias-para-evoluir)
+  <!-- BADGES DE TECNOLOGIAS -->
+  <p>
+    <img src="https://img.shields.io/badge/Vite-v8.0+-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-v4.2+-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+    <img src="https://img.shields.io/badge/HTML5-Semântico-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
+    <img src="https://img.shields.io/badge/JSON-Dados_Externos-000000?style=for-the-badge&logo=json&logoColor=white" alt="JSON" />
+  </p>
+
+  <!-- BADGES DE DEPLOY E STATUS -->
+  <p>
+    <img src="https://img.shields.io/badge/Deploy-GitHub_Pages-222222?style=for-the-badge&logo=github-pages&logoColor=white" alt="GitHub Pages" />
+    <img src="https://img.shields.io/badge/Status-Online-brightgreen?style=for-the-badge" alt="Status" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
+  </p>
+
+  <!-- LINKS RÁPIDOS -->
+  <p>
+    <a href="#-visão-geral">📖 Visão Geral</a> •
+    <a href="#-tecnologias">🛠️ Tecnologias</a> •
+    <a href="#-funcionalidades">⚡ Funcionalidades</a> •
+    <a href="#-como-rodar">🚀 Como Rodar</a> •
+    <a href="#-deploy">🌐 Deploy</a>
+  </p>
+
+</div>
 
 ---
 
-## 1. VISÃO GERAL DO PROJETO
+## 📖 Visão Geral
 
-O projeto **RW Joias** é uma landing page premium desenvolvida para uma joalheria fictícia. O objetivo principal é demonstrar a construção de um site moderno e responsivo utilizando as tecnologias mais atuais do ecossistema JavaScript, com foco em performance e experiência do usuário. Este projeto serve como um excelente ponto de partida para quem busca aprimorar suas habilidades em desenvolvimento front-end.
+O **RW JOIAS** é uma landing page premium desenvolvida para uma joalheria fictícia, projetada para transmitir **sofisticação, exclusividade e confiança**. O projeto combina um design luxuoso baseado em tons de dourado, preto e branco com uma experiência interativa fluida, incluindo animações de scroll, modais de coleção, galeria com lightbox e navegação responsiva.
 
-**Principais Características:**
-- **Design Premium Apple/Dribbble Style:** Paleta de cores suaves baseada em creme, champanhe e dourado, transmitindo elegância, sofisticação e exclusividade.
-- **Animações e Interatividade:** Implementação de efeitos de *scroll reveal*, animações de *hover* em cards, modais expansíveis para visualização de coleções, lightbox com zoom para galeria e menu mobile funcional.
-- **Responsividade:** Desenvolvido com uma abordagem *mobile-first*, garantindo que o layout e a funcionalidade se adaptem perfeitamente a qualquer tamanho de tela, desde smartphones até desktops de alta resolução.
-- **Performance Otimizada:** Utilização do **Vite** como ferramenta de build, proporcionando um ambiente de desenvolvimento extremamente rápido com *Hot Module Replacement (HMR)* e builds otimizados para produção.
-- **Estilização Eficiente:** Uso do **Tailwind CSS v4** para estilização rápida e consistente, permitindo a criação de designs complexos diretamente no HTML com classes utilitárias.
+> 💡 **Objetivo:** Demonstrar a construção de um site moderno e responsivo utilizando **Vite**, **Tailwind CSS v4** e **JavaScript Vanilla**, com dados dinâmicos carregados via **JSON** externo.
 
-**Tecnologias Utilizadas:**
+### ✨ Destaques Visuais
+
+| Hero Section | Coleções Interativas | Galeria Premium |
+|:---:|:---:|:---:|
+| Título elegante com gradiente dourado | Cards com hover e modal de detalhes | Slider com overlay e lightbox |
+| Animação de float e scroll suave | WhatsApp integrado para compra | Navegação por teclado (setas/ESC) |
+
+---
+
+## 🛠️ Tecnologias
 
 | Tecnologia | Versão | Função Principal |
-| :--- | :--- | :--- |
-| **Vite** | v8.0+ | Ferramenta de build de próxima geração e servidor de desenvolvimento local. |
-| **Tailwind CSS** | v4.2+ | Framework CSS utilitário para estilização rápida e responsiva. |
-| **PostCSS** | v8.5+ | Ferramenta para transformar CSS com plugins, essencial para o processamento do Tailwind. |
-| **JavaScript** | Vanilla | Implementação da lógica de interatividade, como modais, menu mobile e animações de scroll. |
-| **HTML5** | - | Estruturação semântica e acessível do conteúdo da página. |
+|:---:|:---:|:---|
+| **Vite** | v8.0+ | Build tool de próxima geração com HMR ultrarrápido |
+| **Tailwind CSS** | v4.2+ | Framework utilitário para estilização responsiva |
+| **PostCSS** | v8.5+ | Processamento de CSS com plugins (Tailwind + Autoprefixer) |
+| **JavaScript** | ES6+ | Lógica de interatividade, modais, animações e fetch de dados |
+| **HTML5** | — | Estruturação semântica e acessível |
+| **JSON** | — | Armazenamento externo de dados (coleções e galeria) |
+| **Font Awesome** | v6.5+ | Ícones premium para UI |
+| **Google Fonts** | — | Tipografia Cinzel + Inter |
 
 ---
 
-## 2. PRÉ-REQUISITOS E INSTALAÇÃO
+## ⚡ Funcionalidades
 
-Para rodar este projeto localmente, estudar seu código e fazer suas próprias modificações, você precisará ter o Node.js instalado em sua máquina. O Node.js inclui o npm (Node Package Manager), que será usado para gerenciar as dependências do projeto.
-
-### 2.1. Verificar Node.js
-
-Abra o terminal (ou o terminal integrado do VS Code) e execute os seguintes comandos para verificar se o Node.js e o npm estão instalados:
-
-```bash
-node --version
-npm --version
-```
-
-Se os comandos retornarem números de versão (ex: `v20.11.0` para Node.js e `10.2.4` para npm), você está pronto para prosseguir. Caso contrário, baixe e instale a versão LTS (Long Term Support) mais recente do [Node.js](https://nodejs.org/pt-br/download).
-
-### 2.2. Instalar Dependências
-
-Com o terminal aberto na pasta raiz do projeto (`rw-joias`), execute o comando abaixo para baixar e instalar todas as bibliotecas e ferramentas necessárias (Vite, Tailwind CSS, PostCSS, Autoprefixer, etc.):
-
-```bash
-npm install
-```
-
-Este comando lerá o arquivo `package.json` e instalará todas as dependências listadas em `devDependencies` na pasta `node_modules/`.
-
-### 2.3. Rodar o Servidor de Desenvolvimento
-
-Após a instalação das dependências, você pode iniciar o servidor de desenvolvimento local do Vite. Isso permitirá que você visualize o projeto no navegador e veja as alterações em tempo real enquanto codifica.
-
-```bash
-npm run dev
-```
-
-O terminal exibirá uma mensagem indicando que o servidor está rodando, geralmente com um link como `http://localhost:5173/rw-joias/`. Copie e cole este link no seu navegador para abrir o projeto.
-
-> **Dica:** O Vite oferece *Hot Module Replacement (HMR)*, o que significa que a maioria das suas alterações no código (HTML, CSS, JavaScript) serão refletidas instantaneamente no navegador, sem a necessidade de recarregar a página manualmente.
+- 🎨 **Design Luxo** — Paleta premium com dourado `#D4AF37`, preto `#2C2C2C` e cream `#FAF9F6`
+- 📱 **100% Responsivo** — Mobile-first, adapta-se de smartphones a desktops 4K
+- 🖼️ **Galeria Interativa** — Slider com navegação por botões, indicadores e lightbox com suporte a teclado
+- 🛍️ **Modal de Coleção** — Visualização detalhada de itens com slider interno e botão direto para WhatsApp
+- ✨ **Scroll Reveal** — Animações suaves de entrada ao rolar a página (Intersection Observer)
+- 📂 **Dados Dinâmicos** — Coleções e galeria carregadas de arquivo `data.json` externo
+- 🍔 **Menu Mobile** — Navegação hamburguer com animação de abertura/fechamento
+- ⌨️ **Acessibilidade** — Navegação por teclado no lightbox (ESC, setas), semântica HTML5
 
 ---
 
-## 3. ESTRUTURA DO PROJETO
-
-Compreender a organização das pastas e arquivos é um passo crucial para qualquer desenvolvedor. A estrutura a seguir é padrão para projetos Vite e ajuda a manter o código organizado e escalável.
+## 📁 Estrutura do Projeto
 
 ```text
 rw-joias/
-├── node_modules/           # Contém todas as bibliotecas e dependências instaladas pelo npm. **Não deve ser versionado no Git.**
-├── public/                 # Armazena assets estáticos que são servidos diretamente, como `favicon.svg` e `icons.svg`. Imagens grandes também podem ir aqui.
-├── src/                    # Contém o código-fonte principal da sua aplicação.
-│   ├── main.js             # O arquivo JavaScript principal. É o ponto de entrada da aplicação, onde o CSS é importado e a lógica JS é inicializada.
-│   └── style.css           # O arquivo CSS principal, onde as diretivas do Tailwind e seus estilos customizados são definidos.
-├── index.html              # O arquivo HTML principal. É a única página do projeto e o ponto de entrada para o navegador.
-├── package.json            # Define as informações do projeto, scripts de execução (dev, build, deploy) e lista todas as dependências.
-├── postcss.config.js       # Arquivo de configuração para o PostCSS, que processa o CSS, incluindo o Tailwind CSS e o Autoprefixer.
-├── tailwind.config.js      # Arquivo de configuração do Tailwind CSS, onde você personaliza o tema, cores, fontes, breakpoints, etc.
-├── vite.config.js          # Arquivo de configuração do Vite, usado para definir o comportamento do servidor de desenvolvimento e do processo de build.
-└── README.md               # Este documento, contendo toda a documentação do projeto.
+├── 📁 node_modules/          # Dependências (não versionar)
+├── 📁 public/                # Assets estáticos
+│   ├── data.json             # ⭐ Dados das coleções e galeria
+│   └── rwjlogotipo2.png      # Logo da marca
+├── 📁 src/
+│   ├── main.js               # Lógica principal (fetch, render, modais)
+│   └── style.css             # Tailwind + estilos customizados
+├── index.html                # Ponto de entrada
+├── package.json              # Scripts e dependências
+├── vite.config.js            # Configuração do Vite (base path)
+├── postcss.config.js         # Configuração PostCSS (Tailwind v4)
+├── tailwind.config.js        # Tema customizado (cores, fontes, animações)
+└── README.md                 # Este documento
 ```
 
 ---
 
-## 4. CONFIGURAÇÃO DO VITE
+## 🚀 Como Rodar
 
-O Vite é uma ferramenta de build moderna que oferece uma experiência de desenvolvimento extremamente rápida. A configuração do Vite é feita através do arquivo `vite.config.js`.
+### Pré-requisitos
 
-**Arquivo `vite.config.js`:**
+- [Node.js](https://nodejs.org/) v20+ (com npm)
+- Git instalado
 
-```javascript
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  base: '/rw-joias/',  // IMPORTANTE: Define o caminho base para o deploy em subdiretórios (ex: GitHub Pages)
-  build: {
-    outDir: 'dist',    // Pasta onde os arquivos otimizados para produção serão gerados
-    assetsDir: 'assets', // Subpasta dentro de `outDir` para assets (CSS, JS, imagens)
-  }
-})
-```
-
-**Explicação:**
-- `base: '/rw-joias/'`: Esta propriedade é crucial para projetos que serão hospedados em subdiretórios, como o GitHub Pages. Se o seu repositório se chama `rw-joias`, o site será acessível em `https://seunome.github.io/rw-joias/`. O `base` garante que todos os caminhos para seus assets (CSS, JS, imagens) sejam gerados corretamente, evitando links quebrados.
-- `build.outDir: 'dist'`: Define que todos os arquivos de produção (HTML, CSS, JS otimizados) serão colocados na pasta `dist/` após o comando `npm run build`.
-- `build.assetsDir: 'assets'`: Especifica que os assets (CSS, JS, imagens) dentro da pasta `dist/` serão organizados em uma subpasta chamada `assets/`.
-
----
-
-## 5. CONFIGURAÇÃO DO TAILWIND CSS E POSTCSS
-
-O Tailwind CSS é um framework utilitário que permite estilizar seu HTML diretamente com classes pré-definidas. Para que ele funcione corretamente em um projeto Vite, ele precisa ser processado pelo PostCSS.
-
-#### CONFIGURAR TAILWIND INTELLISENSE
-
-Para Tailwind CSS v4 ou projetos com arquivos CSS como entrada: Como o v4 é "CSS first", você deve indicar o caminho do arquivo CSS que importa o Tailwind (ex: @import "tailwindcss") nas configurações do VS Code. 
-
-Adicione no settings.json o seguinte:
-
-```json
-"tailwindCSS.experimental.configFile": "src/style.css"   
-```
-
-### 5.1. O Arquivo `postcss.config.js`
-
-Este arquivo diz ao PostCSS quais plugins usar para processar o seu CSS.
-
-```javascript
-export default {
-  plugins: {
-    '@tailwindcss/postcss': {}, // Plugin oficial para Tailwind v4
-    autoprefixer: {},           // Adiciona prefixos de navegadores automaticamente (ex: -webkit-, -moz-)
-  },
-}
-```
-
-### 5.2. O Arquivo `tailwind.config.js` (Opcional no v4)
-
-No Tailwind v4, a maioria das configurações pode ser feita diretamente no arquivo CSS usando a diretiva `@theme`. No entanto, se você ainda usar o arquivo de configuração, ele serve para definir o conteúdo e as extensões do tema.
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      // No v4, prefira usar @theme no style.css
-    },
-  },
-  plugins: [],
-}
-```
-
-### 5.3. O CSS Organizado (`src/style.css`)
-
-Este é o coração da estilização. No Tailwind v4, usamos uma abordagem mais moderna e baseada em CSS nativo.
-
-```css
-@import "tailwindcss";
-
-/* ============================================
-   🎨 THEME - CORES PREMIUM
-   ============================================ */
-@theme inline {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-
-  /* Paleta Premium - Tons Suaves */
-  --color-cream: #FAF9F6;           /* Fundo principal */
-  --color-nude: #F5F0EB;            /* Secundário */
-  --color-champagne: #E8E0D5;       /* Destaque */
-  --color-gold: #D4AF37;            /* Dourado premium */
-  --color-gold-light: #E5C56B;      /* Dourado claro */
-  --color-charcoal: #2C2C2C;        /* Texto principal */
-  --color-charcoal-light: #5A5A5A;  /* Texto secundário */
-}
-
-/* Regras de Ouro para o CSS com Tailwind: */
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    background: var(--color-cream);
-    color: var(--color-charcoal);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-  }
-}
-
-@layer utilities {
-  /* Classes pequenas e específicas */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
-
-**O que vai em cada `@layer`?**
-
-| Layer               | O que colocar                        | Exemplo                                               |
-| :------------------ | :----------------------------------- | :---------------------------------------------------- |
-| `@layer base`       | Reset CSS, estilos de elementos HTML | `body`, `html`, `h1`, scrollbar global                |
-| `@layer components` | Classes reutilizáveis grandes        | `.collection-card`, `.glass-effect`                   |
-| `@layer utilities`  | Classes pequenas e específicas       | `.reveal`, `.no-scrollbar`                            |
-
----
-
-## 6. GUIA DE CORES E DESIGN
-
-O design premium da RW Joias baseia-se em suavidade, elegância e uma paleta de cores inspirada no estilo Apple/Dribbble para transmitir sofisticação.
-
-### 6.1. Paleta de Cores
-
-| Cor | Código Hexadecimal | Uso Principal |
-| :--- | :--- | :--- |
-| **Creme** | `#FAF9F6` | Fundo principal da página, áreas claras. |
-| **Nude** | `#F5F0EB` | Fundos secundários, backgrounds suaves. |
-| **Champanhe** | `#E8E0D5` | Destaques, botões, ícones, textos importantes. |
-| **Dourado** | `#D4AF37` | Botões, ícones, textos importantes. |
-| **Dourado Claro** | `#E5C56B` | Hover states, gradientes, detalhes. |
-| **Charcoal** | `#2C2C2C` | Texto principal (substituto do preto puro). |
-| **Charcoal Light** | `#5A5A5A` | Texto secundário, descrições. |
-
-**Como Aplicar Cores (Exemplos de Classes Tailwind):**
-
-```html
-<!-- FUNDO CREME -->
-<div class="bg-cream">...</div>
-
-<!-- TEXTO DOURADO -->
-<h1 class="text-gold">Título Elegante</h1>
-
-<!-- BOTÃO CHARCOAL COM HOVER DOURADO -->
-<button class="bg-charcoal text-cream hover:bg-gold transition-all">Contato</button>
-
-<!-- BORDA CHAMPAGNE SUTIL -->
-<div class="border border-champagne/30">...</div>
-```
-
-### 6.2. Tipografia e Fontes
-
-A escolha das fontes foi atualizada para um visual mais leve e moderno. Combinamos uma fonte serifada clássica com uma sans-serif de alta legibilidade.
-
-**Fontes Utilizadas:**
-
-| Fonte | Uso Principal | Característica |
-| :--- | :--- | :--- |
-| **Playfair Display** | Títulos, Logo | Serifada elegante, estilo clássico luxuoso. |
-| **Inter** | Textos, Parágrafos | Sans-serif moderna, alta legibilidade. |
-
-**Como Usar as Fontes (Exemplos de Classes Tailwind):**
-
-```html
-<!-- TÍTULOS PRINCIPAIS -->
-<h1 class="font-serif text-5xl font-light">RW JOIAS</h1>
-
-<!-- TEXTOS CORRIDOS -->
-<p class="font-sans text-charcoal-light leading-relaxed">
-  Texto descritivo aqui...
-</p>
-```
-
-### 6.3. Hierarquia Tipográfica
-
-Manter uma hierarquia clara nos textos ajuda na leitura e na compreensão do conteúdo.
-
-```html
-<!-- HERO - Título Principal -->
-<h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-charcoal">
-  Joias que <span class="italic text-gold">eternizam</span> momentos
-</h1>
-
-<!-- Seção - Título -->
-<h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal">
-  Tradição e <span class="italic text-gold">Excelência</span>
-</h2>
-
-<!-- Corpo de texto -->
-<p class="font-sans text-charcoal/60 text-lg leading-relaxed">
-  Descrição detalhada aqui...
-</p>
-```
-
-### 6.4. Boas Práticas de Acessibilidade
-
-Um bom design também é acessível. Algumas dicas:
-- **Contraste:** A combinação de Creme e Charcoal garante um contraste excelente para leitura.
-- **Tamanho da Fonte:** Use unidades relativas (`rem`) para permitir o zoom do navegador.
-- **Semântica HTML:** Utilize as tags HTML corretamente (`<nav>`, `<main>`, `<section>`, `<footer>`).
-
----
-
-## 7. ANATOMIA DO CÓDIGO (HTML, CSS E JS)
-
-A integração correta entre HTML, CSS e JavaScript é o que diferencia um projeto amador de um profissional.
-
-### 7.1. O HTML Limpo (`index.html`)
-
-No Vite, o `index.html` é o ponto de entrada. O CSS é importado via JavaScript no `main.js`.
-
-**Estrutura Essencial:**
-
-```html
-<!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RW JOIAS - O Rei das Joias</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-</head>
-<body class="font-sans antialiased bg-cream text-charcoal">
-    <!-- Navbar, Hero, Seções... -->
-
-    <!-- Script principal (importa o CSS internamente) -->
-    <script type="module" src="/src/main.js"></script>
-</body>
-</html>
-```
-
-### 7.2. O JavaScript Modular (`src/main.js`)
-
-O `src/main.js` gerencia os dados e a interatividade.
-
-```javascript
-import './style.css';
-
-// Dados das Coleções
-const collections = [
-    { id: 'pulseira', name: 'Pulseiras', image: '...', images: [...] },
-    // ...
-];
-
-// Renderização Dinâmica
-function renderCollections() {
-    const grid = document.getElementById('collections-grid');
-    if (grid) {
-        grid.innerHTML = collections.map(c => `
-            <div class="collection-card reveal" data-collection-id="${c.id}">
-                <img src="${c.image}" alt="${c.name}">
-                <h3>${c.name}</h3>
-            </div>
-        `).join('');
-    }
-}
-
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    renderCollections();
-    // ... outras funções
-});
-```
-
-### 7.3. Funções de Interatividade
-
-- **Galeria com Lightbox:** Permite visualizar imagens em tela cheia com zoom.
-- **Modais de Coleção:** Abrem detalhes específicos de cada categoria de joia.
-- **Scroll Reveal:** Animações que surgem conforme o usuário rola a página.
-
----
-
-## 8. COMO EDITAR E PERSONALIZAR
-
-### 8.1. Trocar Imagens
-
-As imagens estão centralizadas no array `collections` dentro do `main.js`. Basta substituir as URLs das imagens.
-
-### 8.2. Editar Textos
-
-A maioria dos textos estáticos está diretamente no `index.html`. Procure pelas tags `<h1>`, `<h2>` e `<p>`.
-
-### 8.3. Adicionar Nova Coleção
-
-Adicione um novo objeto ao array `collections` no `main.js`. O sistema irá renderizar o novo card automaticamente.
-
-### 8.4. Mudar Cores para Outros Negócios
-
-Edite as variáveis de cor no bloco `@theme` do arquivo `src/style.css`.
-
----
-
-## 9. GITHUB E VERSIONAMENTO
-
-### 9.1. Fluxo Básico do Git
+### Passo a passo
 
 ```bash
-git add .
-git commit -m "feat: atualiza layout para estilo premium"
-git push origin main
+# 1. Clone o repositório
+git clone https://github.com/SEU-USUARIO/rw-joias.git
+
+# 2. Entre na pasta do projeto
+cd rw-joias
+
+# 3. Instale as dependências
+npm install
+
+# 4. Inicie o servidor de desenvolvimento
+npm run dev
 ```
 
-### 9.2. Convenção de Commits
+> O projeto estará disponível em `http://localhost:5173/rwjoias/` (ou porta alternativa).
+> 
+> 💡 O Vite oferece **Hot Module Replacement (HMR)** — alterações refletem instantaneamente!
 
-| Emoji | Tipo | Descrição |
-| :--- | :--- | :--- |
-| ✨ | feat | Nova funcionalidade |
-| 💄 | style | Mudanças de estilo/CSS |
-| 🐛 | fix | Correção de bug |
+### Scripts disponíveis
 
----
-
-## 10. DEPLOY - COLOCANDO ONLINE
-
-### 10.1. GitHub Pages
-
-1. Instale o pacote: `npm install gh-pages --save-dev`
-2. Adicione o script de deploy no `package.json`.
-3. Execute `npm run deploy`.
-
-### 10.2. Netlify / Vercel
-
-Basta conectar seu repositório GitHub. O Vite será detectado automaticamente.
+| Comando | Descrição |
+|:---|:---|
+| `npm run dev` | Inicia servidor de desenvolvimento com HMR |
+| `npm run build` | Gera build otimizado para produção na pasta `dist/` |
+| `npm run preview` | Pré-visualiza o build de produção localmente |
+| `npm run deploy` | Faz deploy automático para GitHub Pages |
 
 ---
 
-## 11. 🛠️ ONDE ERREI E O QUE FOI MELHORADO
+## 🌐 Deploy
 
-### 11.1. Configuração Incompleta do Tailwind v4
-- **Problema:** O novo padrão v4 exige importação direta no CSS e uso de `@theme`.
-- **Solução:** Migramos as configurações do `tailwind.config.js` para o `style.css`.
+### GitHub Pages (Recomendado)
 
-### 11.2. Funções de Modal não Acessíveis
-- **Problema:** Funções dentro de módulos JS não são globais por padrão.
-- **Solução:** Expusemos as funções necessárias ao objeto `window` (ex: `window.openModal = openModal`).
+O projeto já está configurado para deploy automático:
 
-### 11.3. Melhorias Visuais Adicionais
-- ✨ Paleta Creme/Dourado: Mais sofisticada que o preto puro.
-- 🎨 Playfair Display: Títulos mais elegantes e leves.
-- 🖼️ Lightbox Apple Style: Experiência de usuário superior na galeria.
+```bash
+# Gera build e envia para GitHub Pages
+npm run deploy
+```
 
----
+> ⚠️ Certifique-se de que `vite.config.js` tem `base: '/rwjoias/'` (nome do seu repositório).
 
-## 12. PRÓXIMOS PASSOS E IDEIAS PARA EVOLUIR
+### Outras opções
 
-- **Dark Mode:** Adicionar um toggle para alternar entre o tema Creme e um tema Dark Boutique.
-- **WhatsApp API:** Integrar um botão de orçamento que já envia o nome da joia selecionada.
-- **Filtros Dinâmicos:** Permitir filtrar a galeria por tipo de metal (Ouro/Prata).
+- **Netlify:** Conecte o repositório Git, build command: `npm run build`, publish directory: `dist`
+- **Vercel:** Importe o repositório — a plataforma detecta automaticamente a configuração Vite
 
 ---
 
-> 💎 "Cada linha de código é uma joia em construção. Continue praticando, continue aprendendo."
+## 🎨 Personalização
 
-- **Autor:** David Gilmour - dgilmourcode
-- **Projeto:** RW Joias - Landing Page Premium
-- **Última Atualização:** Abril 2026
-- **Stack:** Vite + Tailwind CSS v4 + Vanilla JS + FontAwesome
+### Trocar imagens das coleções
 
+Edite `public/data.json`:
+
+```json
+{
+  "collections": [
+    {
+      "id": "pulseira",
+      "name": "Pulseiras",
+      "image": "https://images.unsplash.com/photo-xxx",
+      "items": [
+        {
+          "src": "https://images.unsplash.com/photo-yyy",
+          "titulo": "Pulseira Grumet 18k",
+          "preco": "R$ 4.250,00",
+          "material": "Ouro 18k legítimo",
+          "disponibilidade": "Pronta Entrega"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Mudar cores do tema
+
+Edite `tailwind.config.js`:
+
+```javascript
+colors: {
+  gold: { 500: '#D4AF37' },    // Dourado principal
+  cream: '#FAF9F6',             // Fundo claro
+  charcoal: '#2C2C2C',        // Texto escuro
+}
+```
+
+---
+
+## 🐛 Solução de Problemas
+
+| Problema | Solução |
+|:---|:---|
+| Coleções não aparecem | Verifique se `data.json` está em `public/` e o caminho no `main.js` está correto |
+| CSS não atualiza | Limpe cache: `Ctrl + Shift + R` (Windows) / `Cmd + Shift + R` (Mac) |
+| Imagens quebram no deploy | Use caminhos absolutos: `./data.json` ou URLs completas |
+| Porta 5173 ocupada | Vite usa porta automática, ou force: `npm run dev -- --port 3000` |
+| `npm install` falha | Delete `node_modules/` e `package-lock.json`, rode `npm install` novamente |
+
+---
+
+## 📚 Documentação Completa
+
+Para um guia didático detalhado sobre cada tecnologia, configuração e decisão de design, consulte o **[Guia Completo — RW JOIAS](GUIA_COMPLETO.md)** incluído neste repositório.
+
+Tópicos cobertos:
+- Configuração do Vite e Tailwind CSS v4
+- Anatomia do código (HTML, CSS, JS)
+- Intersection Observer e animações
+- GitHub e versionamento
+- Deploy em múltiplas plataformas
+- Análise de erros comuns e correções
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
+
+---
+
+<div align="center">
+
+  <p>💎 Desenvolvido com dedicação por <strong>David Gilmour</strong></p>
+  <p>
+    <a href="https://github.com/dgilmourcode" target="_blank">GitHub</a> •
+    <a href="https://linkedin.com/in/dgilmourcode" target="_blank">LinkedIn</a> •
+    <a href="https://instagram.com/rwjoiassthe" target="_blank">Instagram RW Joias</a>
+  </p>
+
+  <p><em>Transformando código em joias digitais ✨</em></p>
+
+</div>
+automaticamente o Vite e fará o deploy.
+
+### 10.3. Vercel (Gratuito)
+
+A Vercel é outra excelente plataforma para deploy de front-ends, conhecida por sua facilidade de uso e integração com frameworks modernos como o Vite.
+
+**Método 1: Deploy via Vercel CLI**
+
+1.  **Instale o Vercel CLI globalmente:**
+    ```bash
+    npm i -g vercel
+    ```
+2.  **Faça o deploy:**
+    ```bash
+    vercel
+    ```
+    Siga as instruções para vincular seu projeto e fazer o deploy.
+
+**Método 2: Integração com Git (Recomendado)**
+
+1.  **Envie seu código para o GitHub:** Seu projeto deve estar no GitHub.
+2.  **Faça login no Vercel:** Acesse [vercel.com](https://vercel.com/) e faça login.
+3.  **Importe seu projeto:** Clique em "Add New..." -> "Project" -> "Import Git Repository" e selecione seu repositório `rw-joias`.
+4.  **Configurações de Build:** A Vercel geralmente detecta automaticamente que é um projeto Vite e configura o comando de build (`npm run build`) e o diretório de saída (`dist`) corretamente. Confirme as configurações e clique em "Deploy".
+
+---
+
+## 🛠️ Análise de Erros
+
+Esta seção é crucial para o seu aprendizado. Ela detalha os problemas encontrados no projeto original, explica por que eles ocorriam e como foram corrigidos, transformando-os em lições valiosas.
+
+### 11.1. Erro de CSS (PostCSS)
+
+**Onde você errou:** No arquivo `src/style.css`, havia um bloco `@layer utilities {` que **não foi fechado** corretamente com a chave `}`. Além disso, algumas classes customizadas (como `.bg-gradient-gold`) estavam duplicadas, aparecendo tanto dentro de um `@layer` quanto soltas no arquivo.
+
+**Por que dava erro:** O PostCSS (a ferramenta que processa o seu CSS, incluindo o Tailwind) é muito rigoroso com a sintaxe. Um bloco CSS não fechado ou uma estrutura inválida faz com que ele não consiga parsear o arquivo, resultando em um erro `CssSyntaxError: Unclosed block` durante o `npm run build` ou `npm run dev`. A duplicação de classes, embora não cause um erro de build, aumenta o tamanho do arquivo CSS e pode levar a comportamentos inesperados devido à especificidade do CSS.
+
+**Como foi reparado:**
+- Todas as chaves (`{}`) dos blocos `@layer` foram fechadas corretamente.
+- As classes CSS customizadas duplicadas foram removidas, mantendo apenas a definição dentro do `@layer` apropriado (`@layer components` ou `@layer utilities`).
+- O arquivo `src/style.css` foi reorganizado para seguir a [Regra de Ouro de Ordem](#53-o-css-organizado-srcstylecss) para imports e `@layer`s.
+
+### 11.2. Importação do CSS no HTML
+
+**Onde você errou:** No `index.html`, o CSS estava sendo importado da maneira tradicional, usando a tag `<link rel="stylesheet" href="src/style.css">`.
+
+**Por que dava erro:** Em projetos Vite (especialmente com `type="module"` no script principal), o Vite espera que o CSS seja importado via JavaScript (ex: `import './style.css';` no `main.js`). Isso permite que o Vite otimize o CSS, aplique o Hot Module Replacement (HMR) e processe-o corretamente com o PostCSS/Tailwind. Incluir o CSS via `<link>` no HTML pode fazer com que o Tailwind não seja processado ou que o HMR não funcione para estilos.
+
+**Como foi reparado:**
+- A tag `<link rel="stylesheet" href="src/style.css">` foi removida do `index.html`.
+- A linha `import './style.css';` foi adicionada no início do arquivo `src/main.js`, delegando a importação do CSS ao pipeline do Vite.
+
+### 11.3. Funções de Modal não Acessíveis (Scope Issue)
+
+**Onde você errou:** No `index.html`, os elementos que abriam o modal usavam atributos `onclick` como `onclick="openModal('id')"`. No entanto, as funções `openModal` e `closeModal` estavam declaradas dentro do `src/main.js` sem serem expostas globalmente.
+
+**Por que dava erro:** Quando você usa `<script type="module">` (como é o padrão no Vite), todo o JavaScript dentro desse módulo é isolado em seu próprio escopo. Isso significa que funções declaradas dentro de `main.js` não são automaticamente acessíveis a partir do escopo global do navegador (onde o `onclick` do HTML tenta encontrá-las). Consequentemente, clicar nos elementos não disparava as funções do modal.
+
+**Como foi reparado:** No final do arquivo `src/main.js`, as funções `openModal` e `closeModal` foram explicitamente anexadas ao objeto `window`, tornando-as acessíveis globalmente:
+
+```javascript
+window.openModal = openModal;
+window.closeModal = closeModal;
+```
+
+### 11.4. Configuração Incompleta do Tailwind v4
+
+**Onde você errou:** O projeto estava utilizando o Tailwind CSS versão 4.2.2, mas o arquivo `postcss.config.js` não estava configurado para usar o plugin correto para esta versão.
+
+**Por que dava erro:** O Tailwind CSS passou por mudanças significativas em sua arquitetura na versão 4. Ele não é mais um plugin PostCSS "direto" como nas versões anteriores. Em vez disso, ele requer o pacote `@tailwindcss/postcss` para ser processado corretamente pelo PostCSS. A ausência ou configuração incorreta deste plugin resultava em erros de build e no não processamento das classes Tailwind.
+
+**Como foi reparado:**
+- O pacote `@tailwindcss/postcss` foi instalado como uma dependência de desenvolvimento (`npm install -D @tailwindcss/postcss`).
+- O arquivo `postcss.config.js` foi atualizado para incluir o plugin `@tailwindcss/postcss` em sua configuração, garantindo que o Tailwind v4 seja processado corretamente.
+
+### 11.5. Ordem dos Imports no CSS
+
+**Onde você errou:** O `@import url(...)` das fontes do Google Fonts estava localizado no meio do arquivo `src/style.css`, após as diretivas `@tailwind`.
+
+**Por que dava erro:** A especificação do CSS exige que todas as regras `@import` sejam as **primeiras** declarações em um arquivo CSS (com exceção de `@charset`). Quando um `@import` aparece depois de outras regras (como `@tailwind`), o PostCSS e o navegador podem reportar um erro de sintaxe ou simplesmente ignorar a importação, fazendo com que as fontes não sejam carregadas.
+
+**Como foi reparado:** A linha `@import url(...)` foi movida para o topo do arquivo `src/style.css`, antes de todas as diretivas `@tailwind`.
+
+### 11.6. Melhorias Visuais Adicionais
+
+Aproveitamos as correções para aplicar algumas melhorias visuais que modernizam o layout e a experiência do usuário, mantendo a estrutura original do seu projeto:
+- **Navbar com Sombra:** Adicionada uma sombra sutil (`shadow-lg shadow-gold-500/10`) à barra de navegação para realçar o efeito de vidro e dar mais profundidade.
+- **Título do Hero Aprimorado:** O título principal na seção Hero recebeu um emoji (`✨`) e uma sombra de texto (`drop-shadow-lg`) para maior impacto visual e legibilidade sobre a imagem de fundo.
+- **Botões Interativos:** Os botões na seção Hero foram aprimorados com efeitos de escala (`hover:scale-110`) e um `backdrop-blur` para o botão de orçamento, tornando-os mais dinâmicos e convidativos.
+- **Indicador de Scroll Animado:** O ícone de seta para baixo na seção Hero agora tem uma animação de pulso (`animate-bounce`) e um efeito de escala ao passar o mouse (`hover:scale-125`), incentivando o usuário a rolar a página.
+
+---
+
+## 🚀 Próximos Passos
+
+Para continuar seu aprendizado e aprimorar este projeto, aqui estão algumas ideias e sugestões:
+
+1.  **Implementar Dark/Light Mode:** Adicione um botão para alternar entre um tema escuro e um tema claro, utilizando variáveis CSS ou classes Tailwind dinâmicas. Isso é uma ótima prática de acessibilidade e personalização.
+2.  **Filtros de Coleção Dinâmicos:** Crie botões ou um menu suspenso para filtrar as joias por tipo (pulseiras, colares, anéis) sem recarregar a página, utilizando JavaScript para manipular a exibição dos elementos.
+3.  **Integração com WhatsApp:** Adicione um botão flutuante que, ao ser clicado, abre o WhatsApp com uma mensagem pré-preenchida para solicitar um orçamento rápido. Isso melhora a conversão e a comunicação com o cliente.
+4.  **Otimização de Imagens:** Explore ferramentas como [Cloudinary](https://cloudinary.com/) ou [TinyPNG](https://tinypng.com/) para otimizar as imagens do projeto, reduzindo o tempo de carregamento e melhorando a performance geral.
+5.  **Adicionar Testes Automatizados:** Comece a escrever testes unitários para as funções JavaScript mais importantes (ex: `openModal`, `closeModal`). Ferramentas como [Vitest](https://vitest.dev/) são excelentes para projetos Vite.
+6.  **Refatorar JavaScript:** Considere organizar o `main.js` em módulos menores (ex: `modal.js`, `navbar.js`, `animations.js`) e importá-los no `main.js`. Isso melhora a legibilidade e a manutenção do código.
+7.  **SEO Básico:** Adicione meta tags (`<meta name="description" content="...">`, `<meta name="keywords" content="...">`) e otimize os atributos `alt` das imagens para melhorar a visibilidade do site em motores de busca.
+8.  **Animações Avançadas:** Explore bibliotecas de animação JavaScript como [GSAP](https://gsap.com/) ou [Framer Motion](https://www.framer.com/motion/) para criar efeitos visuais ainda mais sofisticados.
+
+---
+
+<div align="center">
+
+  <p>💎 Desenvolvido com dedicação por <strong>David Gilmour</strong></p>
+  <p>
+    <a href="https://github.com/dgilmourcode" target="_blank">GitHub</a> •
+    <a href="https://linkedin.com/in/dgilmourcode" target="_blank">LinkedIn</a> •
+    <a href="https://instagram.com/rwjoiassthe" target="_blank">Instagram RW Joias</a>
+  </p>
+
+  <p><em>Transformando código em joias digitais ✨</em></p>
+
+</div>
