@@ -94,7 +94,7 @@
 
     <div class="absolute inset-0 z-0">
       <div class="absolute inset-0 lg:left-1/2 w-full lg:w-1/2 h-full opacity-40 lg:opacity-100">
-        <img src="https://images.unsplash.com/photo-1631729670375-7b9bc6ba6c07?q=80&w=1600" alt="Corrente Cartier"
+        <img src="https://images.unsplash.com/photo-1668718003253-968664981d79?q=80&w=1600" alt="Corrente Cartier"
           class="w-full h-full object-cover object-center grayscale-[20%] scale-x-[-1]">
         <div class="absolute inset-0 bg-gradient-to-l from-transparent via-cream/10 lg:via-cream/40 to-cream/70"></div>
       </div>
@@ -123,7 +123,7 @@
 
       <div class="flex flex-col sm:flex-row gap-5 justify-center items-center pt-8">
 
-        <a href="#colecoes" class="group relative px-10 py-4 bg-charcoal text-white rounded-full overflow-hidden
+        <a href="#colecoes" class="group relative px-10 py-4 bg-charcoal/85 border-gold/65 text-white rounded-full overflow-hidden
                  shadow-xl hover:-translate-y-1 transition-all duration-500">
           <span class="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/30 to-gold/0 
                        opacity-0 group-hover:opacity-100 transition"></span>
@@ -136,7 +136,7 @@
           </span>
         </a>
 
-        <a href="https://wa.me/5586994888666" target="_blank" class="group px-10 py-4 rounded-full border border-gold/30 text-charcoal backdrop-blur-md
+        <a href="https://wa.me/5586994888666" target="_blank" class="group px-10 py-4 rounded-full border border-black/30 text-charcoal backdrop-blur-md
                          hover:shadow-lg hover:-translate-y-1 transition-all duration-500">
           <span class="flex items-center gap-2">
             <i class="fas fa-paper-plane text-gold group-hover:translate-x-1 transition-transform duration-300"></i>
@@ -270,7 +270,7 @@
 
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
       <div class="w-6 h-10 rounded-full border border-charcoal/20 flex items-start justify-center p-1">
-        <div class="w-1 h-2 bg-gold rounded-full animate-[scrollDot_1.5s_infinite]"></div>
+        <div class="w-1 h-2 bg-gold rounded-full animate-scroll-dot"></div>
       </div>
       <span class="text-[9px] tracking-[0.4em] text-charcoal/40 uppercase">
         Scroll
@@ -381,7 +381,7 @@
 
   <!-- Collections Section -->
   <section id="colecoes" class="py-24 bg-nude/20">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
       <div class="text-center mb-16 reveal">
         <p class="text-gold text-xs uppercase tracking-[0.4em] mb-4 font-medium">Nossas Colecoes</p>
         <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal mb-6">
@@ -399,54 +399,50 @@
     </div>
   </section>
 
-    <!-- Gallery Section -->
-    <section id="galeria" class="py-24 bg-white overflow-hidden">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
-        <div class="text-center reveal">
-          <p class="text-gold text-xs uppercase tracking-[0.4em] mb-4 font-medium">Galeria</p>
-          <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal mb-6">
-            Momentos de <span class="italic text-gold">Brilho</span>
-          </h2>
+  <!-- Gallery Section -->
+  <section id="galeria" class="py-24 bg-white overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 mb-12">
+      <div class="text-center reveal">
+        <p class="text-gold text-xs uppercase tracking-[0.4em] mb-4 font-medium">Galeria</p>
+        <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal mb-6">
+          Momentos de <span class="italic text-gold">Brilho</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto px-4 md:px-12 lg:px-20">
+
+      <!-- Botão Esquerdo -->
+      <button onclick="scrollGallery(-1)" class="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-40
+          w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full
+          flex items-center justify-center
+          text-charcoal hover:bg-gold/40 hover:text-white
+          transition-all border border-champagne">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <div class="gallery-scroll-container overflow-hidden rounded-2xl md:rounded-3xl">
+        <div id="gallery-track"
+          class="flex gap-2 md:gap-4 transition-transform duration-500 ease-out will-change-transform">
         </div>
       </div>
-    
-      <div class="relative max-w-6xl mx-auto px-4 md:px-12 lg:px-20">
-    
-        <!-- Botão Esquerdo - CORRIGIDO -->
-        <button onclick="scrollGallery(-1)" ontouchstart="scrollGallery(-1)" class="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-50 
-                           w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full 
-                           flex items-center justify-center 
-                           text-charcoal hover:bg-gold/40 hover:text-white 
-                           active:scale-95 transition-all duration-300
-                           border border-champagne touch-manipulation">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-    
-        <div class="gallery-scroll-container overflow-hidden rounded-2xl md:rounded-3xl">
-          <div id="gallery-track" class="flex gap-2 md:gap-4 transition-transform duration-500 ease-out">
-            <!-- Images generated by JS -->
-          </div>
-        </div>
-    
-        <!-- Botão Direito - CORRIGIDO -->
-        <button onclick="scrollGallery(1)" ontouchstart="scrollGallery(1)" class="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-50 
-                           w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full 
-                           flex items-center justify-center 
-                           text-charcoal hover:bg-gold/40 hover:text-white 
-                           active:scale-95 transition-all duration-300
-                           border border-champagne touch-manipulation">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-    
-      <div class="flex justify-center gap-2 mt-8" id="gallery-indicators">
-        <!-- Generated by JS -->
-      </div>
-    </section>
+
+      <!-- Botão Direito -->
+      <button onclick="scrollGallery(1)" class="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-40
+          w-10 h-10 md:w-12 md:h-12 bg-white shadow-xl rounded-full
+          flex items-center justify-center
+          text-charcoal hover:bg-gold/40 hover:text-white
+          transition-all border border-champagne">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex justify-center gap-2 mt-8" id="gallery-indicators"></div>
+  </section>
 
   <!-- Como trabalhamos -->
   <section id="processo" class="py-24 bg-charcoal relative overflow-hidden">

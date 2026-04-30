@@ -3,19 +3,19 @@ import './style.css';
 /* ============================================
    VARIAVEIS GLOBAIS
    ============================================ */
-let currentLightboxIndex = 0;
-let currentGallerySlide = 0;
-let collections = [];
-let galleryImages = [];
-let revealObserver = null;
+let currentLightboxIndex = 0;           // Índice da imagem atual no lightbox
+let currentGallerySlide = 0;            // Slide atual da galeria principal
+let collections = [];                   // Array que armazena as coleções
+let galleryImages = [];                 // Array que armazena as imagens da galeria
+let revealObserver = null;              // Observer para animações de scroll
 
 /* ============================================
    VARIAVEIS DO CHECKOUT
    ============================================ */
-let currentOrderItem = null;
-let appliedDiscount = 0;
-let promoCodeApplied = '';
-let originalPriceValue = 0;
+let currentOrderItem = null;            // Item atual sendo comprado
+let appliedDiscount = 0;                // Desconto aplicado em porcentagem
+let promoCodeApplied = '';              // Código promocional aplicado
+let originalPriceValue = 0;             // Preço original do produto
 
 /* ============================================
    MENU MOBILE - TOGGLE
@@ -24,10 +24,12 @@ const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 if (mobileMenuBtn && mobileMenu) {
+    // Toggle do menu mobile ao clicar no botão hamburguer
     mobileMenuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
     });
 
+    // Fecha o menu ao clicar em qualquer link
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
@@ -36,11 +38,12 @@ if (mobileMenuBtn && mobileMenu) {
 }
 
 /* ============================================
-   REVEAL OBSERVER
+   REVEAL OBSERVER - ANIMAÇÕES DE SCROLL
    ============================================ */
 function setupRevealObserver() {
     if (revealObserver) revealObserver.disconnect();
 
+    // Cria observer para detectar quando elementos entram na viewport
     revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -50,8 +53,10 @@ function setupRevealObserver() {
         });
     }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
 
+    // Observa todos os elementos com classe .reveal
     document.querySelectorAll('.reveal').forEach(el => {
         revealObserver.observe(el);
+        // Verifica se já está visível inicialmente
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
             el.classList.add('active');
@@ -60,11 +65,12 @@ function setupRevealObserver() {
 }
 
 /* ============================================
-   CARREGAMENTO DE DADOS
+   CARREGAMENTO DE DADOS DO JSON
    ============================================ */
 async function loadData() {
     const grid = document.getElementById('collections-grid');
 
+    // Mostra loading enquanto carrega
     if (grid) {
         grid.innerHTML = `
       <div class="col-span-full flex flex-col items-center justify-center py-20 gap-4">
@@ -93,15 +99,18 @@ async function loadData() {
         collections = data.collections || [];
         galleryImages = data.galleryImages || [];
 
+        // Renderiza coleções e galeria
         renderCollections();
         renderGallery();
 
+        // Inicializa animações de scroll após renderização
         setTimeout(() => {
             setupRevealObserver();
         }, 100);
 
     } catch (error) {
         console.error('ERRO FATAL:', error);
+        // Mostra erro na tela
         if (grid) {
             grid.innerHTML = `
         <div class="col-span-full text-center py-20">
@@ -131,10 +140,11 @@ function renderCollections() {
         return;
     }
 
+    // Gera HTML das coleções
     const html = collections.map((c, index) => `
         <div onclick="openModal('${c.id}')" 
              class="collection-card reveal group cursor-pointer rounded-xl overflow-hidden shadow-sm bg-white hover:shadow-md transition-all duration-300">
-            <div class="aspect-square overflow-hidden bg-gray-100">
+            <div class="aspect-[4/5] overflow-hidden bg-gray-100">
                 <img src="${c.image}" 
                      alt="${c.name}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -152,7 +162,7 @@ function renderCollections() {
 }
 
 /* ============================================
-   MODAL DE COLECAO
+   MODAL DE COLECAO - EXIBE PRODUTOS
    ============================================ */
 function openModal(collectionId) {
     const modal = document.getElementById('collection-modal');
@@ -165,11 +175,12 @@ function openModal(collectionId) {
 
     const items = collection.items;
 
+    // HTML completo do modal
     const modalHTML = `
     <div class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-fade-in">
         <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal()" id="modal-backdrop"></div>
 
-        <div class="relative bg-white w-full max-w-6xl max-h-[90vh] rounded-[32px] overflow-hidden shadow-2xl flex flex-col md:flex-row animate-modal-in" onclick="event.stopPropagation()">
+        <div class="relative bg-white w-full max-w-6xl max-h-full rounded-[32px] overflow-hidden shadow-2xl flex flex-col md:flex-row animate-modal-in" onclick="event.stopPropagation()">
 
             <button onclick="closeModal()" 
                    class="absolute top-4 right-4 z-[110] w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-all">
@@ -204,25 +215,25 @@ function openModal(collectionId) {
                 </div>
             </div>
 
-            <div class="w-full md:w-2/5 p-6 md:p-12 flex flex-col bg-white overflow-y-auto">
+            <div class="w-full md:w-2/5 p-4 md:p-6 flex flex-col bg-white overflow-y-auto">
                 <div id="modal-info-content">
                     <span class="text-gold font-bold tracking-widest text-[10px] uppercase">Catalogo RW Joias</span>
-                    <h2 id="dynamic-title" class="font-serif text-2xl md:text-3xl mt-2 mb-2 text-gray-900">${items[0].titulo}</h2>
+                    <h2 id="dynamic-title" class="font-serif text-2xl md:text-3xl mt-2 mb-1 text-gray-900">${items[0].titulo}</h2>
 
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <span id="dynamic-price" class="text-xl md:text-2xl font-semibold text-charcoal">${items[0].preco}</span>
                         <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-tighter">Valor aproximado / Consulte gramatura</p>
                     </div>
 
-                    <div class="space-y-3 mb-8">
-                        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+                    <div class="space-y-2 mb-4">
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 flex justify-between items-center">
                             <div>
                                 <p class="text-[9px] uppercase text-gray-400 font-bold">Descricao</p>
                                 <p id="dynamic-material" class="text-sm font-medium text-gray-800">${items[0].material}</p>
                             </div>
                             <i class="fa-solid fa-gem text-gold/50"></i>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+                        <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 flex justify-between items-center">
                             <div>
                                 <p class="text-[9px] uppercase text-gray-400 font-bold">Disponibilidade</p>
                                 <p id="dynamic-status" class="text-sm font-medium text-green-600">${items[0].disponibilidade}</p>
@@ -232,10 +243,13 @@ function openModal(collectionId) {
                     </div>
                 </div>
 
-                <div class="mt-auto pt-6 border-t border-gray-100">
+                <div class="mt-auto pt-3 border-t border-gray-100">
                     <button id="whatsapp-link" type="button"
-                       class="w-full bg-black text-white py-4 rounded-full text-sm font-bold hover:bg-gold transition-all flex items-center justify-center gap-2 shadow-xl shadow-black/10 active:scale-95">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> Finalizar Compra
+                    onclick="openCheckoutModal(currentItem)"
+                    class="w-full bg-black text-white py-4 rounded-full text-sm font-semibold hover:bg-gray-900 transition-colors flex items-center justify-center gap-2 shadow-lg active:scale-95"
+                    style="-webkit-appearance: none; -webkit-tap-highlight-color: transparent;">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> 
+                        <span>Finalizar Compra</span>
                     </button>
                 </div>
             </div>
@@ -253,7 +267,7 @@ function openModal(collectionId) {
 }
 
 /* ============================================
-   CHECKOUT MODERN - CORRIGIDO
+   CHECKOUT MODERN - MODAL DE FINALIZACAO
    ============================================ */
 function openCheckoutModal(item) {
     console.log('Abrindo checkout modal...');
@@ -271,56 +285,214 @@ function openCheckoutModal(item) {
     const priceText = item.preco.replace(/[^\d,]/g, '').replace('.', '').replace(',', '.');
     originalPriceValue = parseFloat(priceText);
 
-    const imgEl = document.getElementById('checkout-product-img');
-    const nameEl = document.getElementById('checkout-product-name');
-    const priceEl = document.getElementById('checkout-product-price');
-    const materialEl = document.getElementById('checkout-product-material');
-    const totalEl = document.getElementById('checkout-total');
-
-    if (imgEl) imgEl.src = item.src;
-    if (nameEl) nameEl.textContent = item.titulo;
-    if (priceEl) priceEl.textContent = item.preco;
-    if (materialEl) materialEl.textContent = item.material;
-    if (totalEl) totalEl.textContent = item.preco;
-
-    const promoInput = document.getElementById('promo-code');
-    const nameInput = document.getElementById('customer-name');
-    const addressInput = document.getElementById('customer-address');
-    const promoMsg = document.getElementById('promo-message');
-    const parcelSelect = document.getElementById('parcelamento');
-
-    if (promoInput) promoInput.value = '';
-    if (nameInput) nameInput.value = '';
-    if (addressInput) addressInput.value = '';
-    if (promoMsg) {
-        promoMsg.classList.add('hidden');
-        promoMsg.textContent = '';
-    }
-    if (parcelSelect) parcelSelect.value = '1';
-
-    document.querySelectorAll('input[name="payment"]').forEach(radio => {
-        radio.checked = radio.value === 'PIX';
-    });
-    updateRadioVisuals();
-    updateParcelamentoState(); // Atualiza estado do parcelamento baseado no pagamento
-    updateTotal();
-
     const checkoutModal = document.getElementById('checkout-modal');
-    if (checkoutModal) {
-        checkoutModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
+    if (!checkoutModal) return;
+
+    const modalHTML = `
+    <div class="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-4 animate-fade-in">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeCheckoutModal()" id="modal-backdrop"></div>
+
+        <div class="relative bg-white w-full max-w-2xl max-h-[95vh] md:max-h-[90vh] rounded-t-[28px] md:rounded-[28px] overflow-hidden shadow-2xl flex flex-col animate-modal-in checkout-modal-content" onclick="event.stopPropagation()">
+            
+            <div class="flex items-center justify-center pt-3 pb-2 bg-gradient-to-b from-gray-50 to-white md:hidden">
+                <div class="w-10 h-1.5 bg-gray-300 rounded-full"></div>
+            </div>
+
+            <button onclick="closeCheckoutModal()" 
+                   class="absolute top-4 right-4 z-[110] w-9 h-9 bg-gray-100/80 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-gray-200 transition-all md:flex hidden">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+
+            <div class="checkout-container">
+                
+                <div class="checkout-scroll-content" id="checkout-scroll">
+                    
+                    <div class="checkout-product-header">
+                        <img id="checkout-product-img" src="${item.src}" alt="${item.titulo}" class="checkout-product-image">
+                        <div class="checkout-product-info">
+                            <h3 id="checkout-product-name" class="checkout-product-title">${item.titulo}</h3>
+                            <p class="checkout-product-material">
+                                <i class="fa-solid fa-gem text-gold/60"></i>
+                                ${item.material}
+                            </p>
+                            <div id="checkout-product-price" class="checkout-product-price">
+                                ${item.preco}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <div class="checkout-section-title">
+                            <i class="fa-regular fa-user"></i>
+                            Dados de Entrega
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nome completo</label>
+                            <input type="text" id="customer-name" class="form-input" placeholder="Digite seu nome">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Endereço completo</label>
+                            <input type="text" id="customer-address" class="form-input" placeholder="Rua, número, bairro, cidade">
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <div class="checkout-section-title">
+                            <i class="fa-regular fa-credit-card"></i>
+                            Forma de Pagamento
+                        </div>
+                        <div class="payment-options">
+                            <label class="payment-option selected" onclick="selectPayment('PIX')">
+                                <input type="radio" name="payment" value="PIX" checked>
+                                <div class="payment-option-header">
+                                    <div class="payment-option-title">
+                                        <i class="fa-brands fa-pix text-green-600"></i>
+                                        PIX
+                                        <span class="payment-option-badge">5% OFF</span>
+                                    </div>
+                                    <div class="payment-radio"></div>
+                                </div>
+                                <p class="payment-option-desc">Aprovação imediata + desconto exclusivo</p>
+                            </label>
+
+                            <label class="payment-option" onclick="selectPayment('DEBITO')">
+                                <input type="radio" name="payment" value="DEBITO">
+                                <div class="payment-option-header">
+                                    <div class="payment-option-title">
+                                        <i class="fa-solid fa-credit-card text-blue-600"></i>
+                                        Cartão de Débito
+                                    </div>
+                                    <div class="payment-radio"></div>
+                                </div>
+                                <p class="payment-option-desc">Pagamento na entrega do produto</p>
+                            </label>
+
+                            <label class="payment-option" onclick="selectPayment('CREDITO')">
+                                <input type="radio" name="payment" value="CREDITO">
+                                <div class="payment-option-header">
+                                    <div class="payment-option-title">
+                                        <i class="fa-solid fa-credit-card text-purple-600"></i>
+                                        Cartão de Crédito
+                                    </div>
+                                    <div class="payment-radio"></div>
+                                </div>
+                                <p class="payment-option-desc">Parcele em até 10x sem juros</p>
+                            </label>
+                        </div>
+
+                        <div id="parcelamento-container" class="mt-4 opacity-50 pointer-events-none">
+                            <label class="form-label">Parcelamento</label>
+                            <select id="parcelamento" class="parcelamento-select">
+                                <option value="1">A vista (sem parcelamento)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <div class="checkout-section-title">
+                            <i class="fa-solid fa-tag"></i>
+                            Cupom de Desconto
+                        </div>
+                        <div class="promo-container">
+                            <input type="text" id="promo-code" class="promo-input" placeholder="Digite o código" maxlength="20">
+                            <button onclick="applyPromoCode()" class="promo-button">Aplicar</button>
+                        </div>
+                        <div id="promo-message" class="promo-message hidden"></div>
+                    </div>
+
+                    <div style="height: 100px;"></div>
+                </div>
+
+                <div class="checkout-footer visible-footer" id="checkout-footer">
+                    <div class="footer-content">
+                        <div class="footer-total">
+                            <span class="footer-total-label">Total do pedido</span>
+                            <span id="checkout-total" class="footer-total-value">${item.preco}</span>
+                        </div>
+                        <button onclick="finalizeOrder()" class="whatsapp-button">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>Finalizar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+    checkoutModal.innerHTML = modalHTML;
+    checkoutModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+        setupCheckoutScroll();
+        updateParcelamentoState();
+        updateTotal();
+    }, 100);
+}
+
+// Helper para seleção de pagamento
+window.selectPayment = (method) => {
+    document.querySelectorAll('.payment-option').forEach(opt => {
+        opt.classList.remove('selected');
+        const radio = opt.querySelector('input[type="radio"]');
+        if (radio && radio.value === method) {
+            opt.classList.add('selected');
+            radio.checked = true;
+        }
+    });
+    updateParcelamentoState();
+    updateTotal();
+};
+
+// Setup do scroll inteligente
+function setupCheckoutScroll() {
+    const scrollContent = document.getElementById('checkout-scroll');
+    const footer = document.getElementById('checkout-footer');
+
+    if (!scrollContent || !footer) return;
+
+    let footerTimeout;
+
+    scrollContent.addEventListener('scroll', () => {
+        const currentScroll = scrollContent.scrollTop;
+        const maxScroll = scrollContent.scrollHeight - scrollContent.clientHeight;
+
+        if (currentScroll > 100 || currentScroll > maxScroll * 0.7) {
+            footer.classList.remove('hidden-footer');
+            footer.classList.add('visible-footer');
+        } else {
+            if (currentScroll < 50 && maxScroll > 200) {
+                footer.classList.remove('visible-footer');
+                footer.classList.add('hidden-footer');
+            }
+        }
+    }, { passive: true });
+
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function () {
+            setTimeout(() => {
+                this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        });
+    });
 }
 
 function closeCheckoutModal() {
     const checkoutModal = document.getElementById('checkout-modal');
     if (checkoutModal) {
-        checkoutModal.classList.add('hidden');
-        document.body.style.overflow = '';
+        checkoutModal.classList.add('animate-fade-out');
+        setTimeout(() => {
+            checkoutModal.classList.add('hidden');
+            checkoutModal.classList.remove('animate-fade-out');
+            checkoutModal.innerHTML = '';
+            document.body.style.overflow = '';
+        }, 300);
     }
 }
 
 function updateRadioVisuals() {
+    // Atualiza visual dos radio buttons de pagamento
     document.querySelectorAll('input[name="payment"]').forEach(radio => {
         const check = radio.closest('label')?.querySelector('.radio-check');
         if (check) {
@@ -340,12 +512,12 @@ function updateParcelamentoState() {
     if (!parcelContainer || !parcelSelect) return;
 
     if (paymentMethod === 'CREDITO') {
-        // Credito: habilita parcelamento
+        // Crédito: habilita parcelamento
         parcelContainer.classList.remove('opacity-50', 'pointer-events-none');
         parcelSelect.disabled = false;
         updateParcelamentoOptions();
     } else {
-        // PIX ou Debito: desabilita parcelamento
+        // PIX ou Débito: desabilita parcelamento
         parcelContainer.classList.add('opacity-50', 'pointer-events-none');
         parcelSelect.disabled = true;
         parcelSelect.innerHTML = '<option value="1">A vista (sem parcelamento)</option>';
@@ -356,7 +528,6 @@ function updateParcelamentoOptions() {
     const select = document.getElementById('parcelamento');
     if (!select || !originalPriceValue) return;
 
-    // 🧠 salva o valor atual antes de resetar
     const currentValue = select.value;
 
     const finalPrice = appliedDiscount > 0
@@ -374,7 +545,7 @@ function updateParcelamentoOptions() {
 
     options += `<option value="1">A vista no Credito - R$ ${displayPrice.toFixed(2).replace('.', ',')}</option>`;
 
-    const maxParcelas = Math.min(12, Math.floor(displayPrice / 50));
+    const maxParcelas = Math.min(10, Math.floor(displayPrice / 50));
 
     for (let i = 2; i <= maxParcelas; i++) {
         const valorParcela = (displayPrice / i).toFixed(2).replace('.', ',');
@@ -384,12 +555,10 @@ function updateParcelamentoOptions() {
 
     select.innerHTML = options;
 
-    // 🧠 tenta restaurar o valor anterior
     if (currentValue && select.querySelector(`option[value="${currentValue}"]`)) {
         select.value = currentValue;
     }
 
-    // 🔥 garante que sempre vai atualizar
     select.onchange = () => updateTotal();
 }
 
@@ -403,7 +572,7 @@ function applyPromoCode() {
         'VIP15': 15,
         'FRETEGRATIS': 0,
         'RWJOIAS20': 20,
-        'OUREI': 25
+        'OREI': 25
     };
 
     if (validCodes[code] !== undefined) {
@@ -476,7 +645,7 @@ function updateTotal() {
 }
 
 /* ============================================
-   FINALIZAR PEDIDO - CORRIGIDO COM PARCELAS
+   FINALIZAR PEDIDO - ENVIA WHATSAPP
    ============================================ */
 function finalizeOrder() {
     if (!currentOrderItem) return;
@@ -514,9 +683,6 @@ function finalizeOrder() {
         pixDiscountText = `\n*Desconto PIX (5%):* -R$ ${pixDiscount.toFixed(2).replace('.', ',')}`;
     }
 
-    // ==========================================
-    // PAGAMENTO - COM PARCELAS CORRETAS
-    // ==========================================
     let pagamentoTexto = '';
 
     if (paymentMethod === 'PIX') {
@@ -547,7 +713,7 @@ function finalizeOrder() {
 }
 
 /* ============================================
-   SETUP MODAL OBSERVER
+   SETUP MODAL OBSERVER - ATUALIZA INFO PRODUTO
    ============================================ */
 function setupModalObserver(collection) {
     const slider = document.getElementById('modal-slider');
@@ -610,11 +776,28 @@ function setupModalObserver(collection) {
 }
 
 /* ============================================
-   GALERIA
+   GALERIA - SISTEMA COMPLETO REVISADO
    ============================================ */
+
+// Estado da galeria
+const galleryState = {
+    currentSlide: 0,           // Slide atual
+    slidesPerView: 1,          // Quantos slides visíveis (responsivo)
+    totalSlides: 0,            // Total de slides
+    isDragging: false,         // Se está arrastando
+    startX: 0,                 // Posição X inicial do toque/scroll
+    currentX: 0,               // Posição X atual
+    translateX: 0              // Transformação X atual
+};
+
+/**
+ * Renderiza a galeria de imagens
+ * Cria os slides HTML e indicadores
+ */
 function renderGallery() {
     const track = document.getElementById('gallery-track');
     const indicatorsContainer = document.getElementById('gallery-indicators');
+
     if (!track || !indicatorsContainer) return;
 
     if (!galleryImages.length) {
@@ -622,89 +805,136 @@ function renderGallery() {
         return;
     }
 
+    // Cria HTML dos slides
     track.innerHTML = galleryImages.map((img, i) => `
-    <div onclick="openLightbox(${i})" 
-         class="gallery-slide flex-shrink-0 cursor-pointer group/slide relative overflow-hidden rounded-xl md:rounded-2xl bg-gray-100">
-        <div class="aspect-[3/4] overflow-hidden">
-            <img src="${img.src}" 
-                 alt="${img.titulo}" 
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-110"
-                 loading="lazy">
+        <div class="gallery-slide flex-shrink-0 cursor-pointer group/slide relative overflow-hidden rounded-xl md:rounded-2xl bg-gray-100" 
+             data-index="${i}">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img src="${img.src}" 
+                     alt="${img.titulo}" 
+                     class="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-110"
+                     loading="lazy")">
+            </div>
+            <div class="gallery-overlay absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/slide:opacity-100 transition-opacity duration-300">
+                <h3 class="text-white font-serif text-lg">${img.titulo}</h3>
+                <p class="text-white/80 text-sm">${img.descricao}</p>
+            </div>
         </div>
+    `).join('');
 
-        <div class="gallery-overlay">
-            <h3 class="text-amber-50">${img.titulo}</h3>
-            <p class="text-amber-100">${img.descricao}</p>
-        </div>
-    </div>
-  `).join('');
+    galleryState.totalSlides = galleryImages.length;
 
-    indicatorsContainer.innerHTML = galleryImages.map((_, i) => `
-    <button onclick="goToSlide(${i})" 
-            class="gallery-indicator w-2 h-2 rounded-full bg-champagne transition-all duration-300 hover:bg-gold ${i === 0 ? 'w-8 bg-gold' : ''}">
-    </button>
-  `).join('');
+    // Detecta quantos slides mostrar por tela
+    updateSlidesPerView();
 
-    currentGallerySlide = 0;
-    track.style.transform = 'translateX(0)';
-    updateGalleryIndicators();
+    // Cria indicadores (dots)
+    createIndicators(indicatorsContainer);
+
+    // Posiciona no slide inicial
+    updateGalleryPosition();
+
+    document.querySelectorAll('.gallery-slide').forEach((slide, i) => {
+        slide.addEventListener('click', () => {
+            openLightbox(i);
+        });
+    });
 }
 
-/* ============================================
-   NAVEGACAO DA GALERIA
-   ============================================ */
+/**
+ * Atualiza quantos slides são visíveis baseado no tamanho da tela
+ * Mobile: 1 slide | Tablet: 2 slides | Desktop: 3 slides
+ */
+function updateSlidesPerView() {
+    const width = window.innerWidth;
+
+    if (width <= 640) {
+        galleryState.slidesPerView = 1;
+    } else if (width <= 1024) {
+        galleryState.slidesPerView = 2;
+    } else {
+        galleryState.slidesPerView = 3;
+    }
+
+    // Garante que o slide atual não ultrapasse o limite
+    const maxSlide = Math.max(0, galleryState.totalSlides - galleryState.slidesPerView);
+    if (galleryState.currentSlide > maxSlide) {
+        galleryState.currentSlide = maxSlide;
+    }
+
+    updateGalleryPosition();
+}
+
+/**
+ * Cria os indicadores (bolinhas) de navegação
+ */
+function createIndicators(container) {
+    const maxIndex = Math.max(0, galleryState.totalSlides - galleryState.slidesPerView);
+
+    container.innerHTML = Array.from({ length: maxIndex + 1 }, (_, i) => `
+        <button class="gallery-indicator w-2 h-2 rounded-full bg-champagne transition-all duration-300 hover:bg-gold ${i === 0 ? 'w-8 bg-gold' : ''}" 
+                onclick="goToSlide(${i})"
+                aria-label="Ir para slide ${i + 1}">
+        </button>
+    `).join('');
+}
+
+/**
+ * Rola a galeria para esquerda ou direita (botões)
+ */
 window.scrollGallery = (direction) => {
-    const track = document.getElementById('gallery-track');
-    const slides = track?.querySelectorAll('.gallery-slide');
-    if (!track || !slides.length) return;
+    const maxSlide = Math.max(0, galleryState.totalSlides - galleryState.slidesPerView);
+    const newSlide = galleryState.currentSlide + (direction * galleryState.slidesPerView);
 
-    // Aguarda o próximo frame para garantir que os elementos estão renderizados
-    requestAnimationFrame(() => {
-        const slide = slides[0];
-        const slideWidth = slide.offsetWidth + 16; // 16px é o gap
-
-        if (slideWidth <= 16) {
-            console.warn('Slide width é 0 ou inválido');
-            return;
-        }
-
-        const containerWidth = track.parentElement.offsetWidth;
-        const visibleSlides = Math.max(1, Math.ceil(containerWidth / slideWidth) - 1);
-
-        const scrollAmount = visibleSlides * direction;
-        const maxIndex = Math.max(0, slides.length - visibleSlides);
-
-        currentGallerySlide = Math.max(0, Math.min(
-            currentGallerySlide + scrollAmount,
-            maxIndex
-        ));
-
-        track.style.transform = `translateX(-${currentGallerySlide * slideWidth}px)`;
-        updateGalleryIndicators();
-    });
+    goToSlide(Math.max(0, Math.min(newSlide, maxSlide)));
 };
 
+/**
+ * Vai para um slide específico (indicadores)
+ */
 window.goToSlide = (index) => {
-    const track = document.getElementById('gallery-track');
-    const slide = track?.querySelector('.gallery-slide');
-    if (!track || !slide) return;
+    const maxSlide = Math.max(0, galleryState.totalSlides - galleryState.slidesPerView);
+    galleryState.currentSlide = Math.max(0, Math.min(index, maxSlide));
 
-    requestAnimationFrame(() => {
-        currentGallerySlide = index;
-        const slideWidth = slide.offsetWidth + 16;
-        track.style.transform = `translateX(-${currentGallerySlide * slideWidth}px)`;
-        updateGalleryIndicators();
-    });
+    updateGalleryPosition();
+    updateIndicators();
 };
 
-function updateGalleryIndicators() {
-    document.querySelectorAll('.gallery-indicator').forEach((ind, i) => {
-        ind.classList.toggle('w-8', i === currentGallerySlide);
-        ind.classList.toggle('bg-gold', i === currentGallerySlide);
-        ind.classList.toggle('w-2', i !== currentGallerySlide);
-        ind.classList.toggle('bg-champagne', i !== currentGallerySlide);
+/**
+ * Atualiza a posição do slider (transform translateX)
+ */
+function updateGalleryPosition() {
+    const track = document.getElementById('gallery-track');
+    const slides = document.querySelectorAll('.gallery-slide');
+
+    if (!track || slides.length === 0) return;
+
+    const slideWidth = slides[0].offsetWidth + 16; // 16px é o gap
+    galleryState.translateX = -galleryState.currentSlide * slideWidth;
+
+    track.style.transform = `translateX(${galleryState.translateX}px)`;
+}
+
+/**
+ * Atualiza indicadores ativos
+ */
+function updateIndicators() {
+    document.querySelectorAll('.gallery-indicator').forEach((indicator, index) => {
+        indicator.classList.toggle('w-8', index === galleryState.currentSlide);
+        indicator.classList.toggle('bg-gold', index === galleryState.currentSlide);
+        indicator.classList.toggle('w-2', index !== galleryState.currentSlide);
+        indicator.classList.toggle('bg-champagne', index !== galleryState.currentSlide);
     });
 }
+
+// Atualiza galeria ao redimensionar tela
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        updateSlidesPerView();
+        createIndicators(document.getElementById('gallery-indicators'));
+    }, 250);
+});
 
 /* ============================================
    FUNCOES DO MODAL DE COLECAO
@@ -724,67 +954,205 @@ window.closeModal = () => {
 };
 
 /* ============================================
-   LIGHTBOX
+   LIGHTBOX MODERNO - ESTILO APPLE PREMIUM
    ============================================ */
+
+let lightboxTouchStartX = 0;
+let lightboxTouchEndX = 0;
+
 function openLightbox(index) {
     currentLightboxIndex = index;
     const modal = document.getElementById('lightbox-modal');
-    if (!modal) return;
+    if (!modal) {
+        console.error('Lightbox modal não encontrado!');
+        return;
+    }
+
+    const currentImage = galleryImages[currentLightboxIndex];
 
     modal.innerHTML = `
-    <div class="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-8 animate-fade-in">
+    <div class="fixed inset-0 z-[100] flex items-center justify-center p-0 animate-fade-in">
+        <!-- Backdrop com blur -->
         <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeLightbox()"></div>
 
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 z-[110] w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all hover:rotate-90">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <!-- Botão Fechar -->
+        <button onclick="closeLightbox()" 
+                class="absolute top-4 right-4 md:top-8 md:right-8 z-[110] w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:rotate-90 hover:scale-110">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
         </button>
 
-        <button onclick="navigateLightbox(-1)" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-[110] w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        <!-- Botões de Navegação -->
+        <button onclick="navigateLightbox(-1)" 
+                class="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-[110] w-12 h-12 md:w-14 md:h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 group">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:-translate-x-0.5 transition-transform">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
         </button>
-        <button onclick="navigateLightbox(1)" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-[110] w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        
+        <button onclick="navigateLightbox(1)" 
+                class="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-[110] w-12 h-12 md:w-14 md:h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 group">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:translate-x-0.5 transition-transform">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
         </button>
 
-        <div class="relative w-full max-w-7xl max-h-[90vh] flex flex-col md:flex-row items-center justify-center gap-8 p-8">
+        <!-- Conteúdo Principal -->
+        <div class="relative w-full max-w-7xl max-h-[100vh] flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 p-4 md:p-12 md:m-6 overflow-hidden"
+             onclick="event.stopPropagation()">
+            
+            <!-- Imagem -->
             <div class="relative flex-1 w-full flex items-center justify-center">
-                <div class="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/50">
+                <div class="relative overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl shadow-black/50 bg-black/20">
                     <img id="lightbox-image" 
-                        src="${galleryImages[currentLightboxIndex].src}" 
-                        alt="${galleryImages[currentLightboxIndex].titulo}"
-                        class="max-h-[60vh] md:max-h-[70vh] w-auto object-contain animate-image-load"
+                        src="${currentImage.src}" 
+                        alt="${currentImage.titulo}"
+                        class="max-h-[50vh] md:max-h-[70vh] w-auto object-contain transition-all duration-500 ease-out"
+                        style="opacity: 0; transform: scale(0.95);"
                         loading="eager">
+                </div>
+                
+                <!-- Contador de imagens -->
+                <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
+                    ${currentLightboxIndex + 1} / ${galleryImages.length}
                 </div>
             </div>
 
-            <div class="w-full md:w-80 text-center md:text-left animate-slide-up">
-                <span class="text-gold/80 text-sm uppercase tracking-widest">Galeria RW Joias</span>
-                <h2 id="lightbox-title" class="font-serif text-3xl md:text-4xl text-white mt-2 mb-3 p-2">${galleryImages[currentLightboxIndex].titulo}</h2>
-                <p id="lightbox-desc" class="text-white/70 text-lg mb-6">${galleryImages[currentLightboxIndex].descricao}</p>
+            <!-- Informações -->
+            <div class="w-full md:w-96 text-center md:text-left px-4 md:px-0 animate-slide-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-4">
+                    <div class="w-2 h-2 rounded-full bg-gold animate-pulse"></div>
+                    <span class="text-gold text-xs uppercase tracking-widest font-semibold">Galeria RW Joias</span>
+                </div>
+                
+                <h2 id="lightbox-title" 
+                    class="font-serif text-3xl md:text-4xl text-white mt-4 mb-4 leading-tight opacity-0 animate-fade-in"
+                    style="animation-delay: 0.2s; animation-fill-mode: forwards;">
+                    ${currentImage.titulo}
+                </h2>
+                
+                <p id="lightbox-desc" 
+                   class="text-white/70 text-base md:text-lg mb-8 leading-relaxed opacity-0 animate-fade-in"
+                   style="animation-delay: 0.3s; animation-fill-mode: forwards;">
+                    ${currentImage.descricao}
+                </p>
+
+                <!-- Indicadores de navegação -->
+                <div class="flex items-center justify-center md:justify-start gap-2">
+                    ${galleryImages.map((_, i) => `
+                        <button onclick="goToLightboxImage(${i})" 
+                                class="h-1.5 rounded-full transition-all duration-300 ${i === currentLightboxIndex ? 'w-8 bg-gold' : 'w-1.5 bg-white/30 hover:bg-white/50'}">
+                        </button>
+                    `).join('')}
+                </div>
             </div>
         </div>
     </div>
-  `;
+    `;
 
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+
+    // Animação de entrada da imagem
+    setTimeout(() => {
+        const img = document.getElementById('lightbox-image');
+        if (img) {
+            img.style.opacity = '1';
+            img.style.transform = 'scale(1)';
+        }
+    }, 50);
+
+    // Setup do touch/swipe
+    setupLightboxTouch();
+}
+
+function setupLightboxTouch() {
+    const modal = document.getElementById('lightbox-modal');
+    if (!modal) return;
+
+    // Touch events para swipe
+    modal.addEventListener('touchstart', handleLightboxTouchStart, { passive: true });
+    modal.addEventListener('touchmove', handleLightboxTouchMove, { passive: true });
+    modal.addEventListener('touchend', handleLightboxTouchEnd);
+}
+
+function handleLightboxTouchStart(e) {
+    lightboxTouchStartX = e.touches[0].clientX;
+}
+
+function handleLightboxTouchMove(e) {
+    lightboxTouchEndX = e.touches[0].clientX;
+}
+
+function handleLightboxTouchEnd() {
+    const swipeThreshold = 50;
+    const diff = lightboxTouchStartX - lightboxTouchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe para esquerda - próxima imagem
+            navigateLightbox(1);
+        } else {
+            // Swipe para direita - imagem anterior
+            navigateLightbox(-1);
+        }
+    }
 }
 
 function updateLightboxContent() {
     const img = document.getElementById('lightbox-image');
     const title = document.getElementById('lightbox-title');
     const desc = document.getElementById('lightbox-desc');
+    const modal = document.getElementById('lightbox-modal');
 
-    if (img && title && desc) {
-        img.style.opacity = '0';
+    if (!img || !title || !desc || !modal) return;
+
+    const currentImage = galleryImages[currentLightboxIndex];
+
+    // Fade out
+    img.style.opacity = '0';
+    img.style.transform = 'scale(0.95)';
+
+    setTimeout(() => {
+        // Atualiza conteúdo
+        img.src = currentImage.src;
+        img.alt = currentImage.titulo;
+        title.textContent = currentImage.titulo;
+        desc.textContent = currentImage.descricao;
+
+        // Atualiza contador
+        const counter = modal.querySelector('.absolute.-bottom-8');
+        if (counter) {
+            counter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
+        }
+
+        // Atualiza indicadores
+        modal.querySelectorAll('button[class*="h-1.5"]').forEach((btn, i) => {
+            if (i === currentLightboxIndex) {
+                btn.className = 'h-1.5 w-8 rounded-full bg-gold transition-all duration-300';
+            } else {
+                btn.className = 'h-1.5 w-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300';
+            }
+        });
+
+        // Fade in
         setTimeout(() => {
-            img.src = galleryImages[currentLightboxIndex].src;
-            title.textContent = galleryImages[currentLightboxIndex].titulo;
-            desc.textContent = galleryImages[currentLightboxIndex].descricao;
             img.style.opacity = '1';
+            img.style.transform = 'scale(1)';
         }, 50);
-    }
+    }, 300);
 }
+
+window.navigateToLightboxImage = (index) => {
+    goToLightboxImage(index);
+};
+
+window.goToLightboxImage = (index) => {
+    if (index === currentLightboxIndex) return;
+    currentLightboxIndex = index;
+    updateLightboxContent();
+};
 
 window.navigateLightbox = (dir) => {
     currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
@@ -798,6 +1166,7 @@ window.closeLightbox = () => {
         setTimeout(() => {
             modal.classList.add('hidden');
             modal.classList.remove('animate-fade-out');
+            modal.innerHTML = '';
             document.body.style.overflow = '';
         }, 300);
     }
@@ -806,7 +1175,7 @@ window.closeLightbox = () => {
 // Suporte teclado
 document.addEventListener('keydown', (e) => {
     const modal = document.getElementById('lightbox-modal');
-    if (modal?.classList.contains('hidden') === false) {
+    if (modal && !modal.classList.contains('hidden')) {
         if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowLeft') navigateLightbox(-1);
         if (e.key === 'ArrowRight') navigateLightbox(1);
@@ -814,7 +1183,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ============================================
-   INICIALIZACAO
+   INICIALIZACAO - DOMContentLoaded
    ============================================ */
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
@@ -836,7 +1205,7 @@ function setupCheckoutListeners() {
     document.querySelectorAll('input[name="payment"]').forEach(radio => {
         radio.addEventListener('change', function () {
             updateRadioVisuals();
-            updateParcelamentoState(); // Atualiza estado do parcelamento
+            updateParcelamentoState();
             updateTotal();
         });
     });
@@ -853,17 +1222,23 @@ function setupCheckoutListeners() {
 }
 
 /* ============================================
-   EXPORTS PARA ONCLICK INLINE
+   EXPORTS PARA ONCLICK INLINE (HTML)
    ============================================ */
+
+// Garante que TODAS as funções estejam no window
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.scrollModalSlider = scrollModalSlider;
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
 window.navigateLightbox = navigateLightbox;
+window.goToLightboxImage = goToLightboxImage;
+window.navigateToLightboxImage = navigateToLightboxImage;
 window.scrollGallery = scrollGallery;
 window.goToSlide = goToSlide;
 window.openCheckoutModal = openCheckoutModal;
 window.closeCheckoutModal = closeCheckoutModal;
 window.applyPromoCode = applyPromoCode;
 window.finalizeOrder = finalizeOrder;
+window.selectPayment = selectPayment;
+

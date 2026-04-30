@@ -111,6 +111,13 @@
           "disponibilidade": "7 dias úteis"
         },
         {
+          "src": "https://cdn.pixabay.com/photo/2018/08/16/19/56/wedding-rings-3611277_1280.jpg",
+          "titulo": "Aliança RW Love Infinity",
+          "preco": "R$ 5.500,00",
+          "material": "Ouro 18k",
+          "disponibilidade": "7 dias úteis"
+        },
+        {
           "src": "https://images.unsplash.com/photo-1677045419114-12f2123e4191?q=80&w=800",
           "titulo": "Aliança Anatômica",
           "preco": "R$ 2.900,00",
@@ -297,16 +304,6 @@
   ],
   "galleryImages": [
     {
-      "src": "https://images.unsplash.com/photo-1565619601015-e57cced38f39?q=80&w=800",
-      "titulo": "Anel Dourado RW",
-      "descricao": "Puro RW Joias"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1679973298026-669cded1a580?q=80&w=800",
-      "titulo": "Collar Modern Prata",
-      "descricao": "Prata Lobisomem"
-    },
-    {
       "src": "https://images.unsplash.com/photo-1534875611686-50fe95ae2624?q=80&w=800",
       "titulo": "Alliance RW",
       "descricao": "Lux RW Joias"
@@ -321,6 +318,21 @@
       "titulo": "Argola Poderosa",
       "descricao": "Mulheres do Futuro"
     },
+    {
+      "src": "https://cdn.pixabay.com/photo/2018/08/16/19/56/wedding-rings-3611277_1280.jpg",
+      "titulo": "Aliança RW Love Infinity",
+      "descricao": "Brilho Exclusivo RW Joias"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1565619601015-e57cced38f39?q=80&w=800",
+      "titulo": "Anel Dourado RW",
+      "descricao": "Puro RW Joias"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1679973298026-669cded1a580?q=80&w=800",
+      "titulo": "Collar Modern Prata",
+      "descricao": "Prata Lobisomem"
+    },  
     {
       "src": "https://images.unsplash.com/photo-1587947330318-88fcd9055420?q=80&w=800",
       "titulo": "Aliança Prata Family",
